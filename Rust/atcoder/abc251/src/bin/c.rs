@@ -11,17 +11,15 @@ fn main() {
     let mut s =HashSet::new();
     let mut ans = 0;
     let mut score = 0;
-    let mut index = 1;
 
-    for (i,j)  in a {
+    for(k ,(i,j) ) in a.into_iter().enumerate() {
         if !s.contains(&i){
             s.insert(i);
             if j > score {
                 score = j;
-                ans = index;
+                ans = k + 1;
             }
         }
-        index+=1;
     }
     println!("{}",ans);
 }
