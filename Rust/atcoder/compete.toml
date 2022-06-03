@@ -30,7 +30,7 @@ fn main() {
     input! {
     }
     
-    println!("{:?}",  );
+    println!("{}",  );
 }
 '''
 
