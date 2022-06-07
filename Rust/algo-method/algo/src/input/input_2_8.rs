@@ -4,13 +4,14 @@ use proconio::input;
 
 fn main() {
     input! {
-        n:usize,
-        a:[String; n],
+        s:String,
+        t:String,
+        u:String
     }
-    let left = a.iter().filter(|&x| x == "left").count();
 
-    println!("{}", if ((left == (n/2)) && n%2 == 0) {"same"} else if left > n/2 {"left"} else {"right"});
+    println!("{}{}{}",u,t,s);
 }
+
 
 #[cfg_attr(any(), rustfmt::skip)]
 #[allow(unused)]

@@ -7,9 +7,9 @@ fn main() {
         n:usize,
         a:[String; n],
     }
-    let left = a.iter().filter(|&x| x == "left").count();
+    
+    println!("{}",a.iter().fold(0,|x,y|x + y.len()));
 
-    println!("{}", if ((left == (n/2)) && n%2 == 0) {"same"} else if left > n/2 {"left"} else {"right"});
 }
 
 #[cfg_attr(any(), rustfmt::skip)]

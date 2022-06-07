@@ -5,11 +5,13 @@ use proconio::input;
 fn main() {
     input! {
         n:usize,
-        a:[String; n],
+        a:[u32; n],
     }
-    let left = a.iter().filter(|&x| x == "left").count();
 
-    println!("{}", if ((left == (n/2)) && n%2 == 0) {"same"} else if left > n/2 {"left"} else {"right"});
+    let ans = a.iter().map(|x|x%10);
+    for i in ans{
+        println!("{}",&i);
+    }
 }
 
 #[cfg_attr(any(), rustfmt::skip)]
