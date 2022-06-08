@@ -1,13 +1,14 @@
 pub use __cargo_equip::prelude::*;
-use std::collections::HashSet;
+
 use proconio::input;
 
 fn main() {
     input! {
-        s:String,
+        l:i32,
+        r:i32,
     }
-    let x:HashSet<char> = s.chars().into_iter().collect();
-    println!("{}",x.len());
+
+    println!("{}",(l..=r).filter(|x| x.to_string() == x.to_string().chars().rev().collect::<String>()).count());
     
 }
 

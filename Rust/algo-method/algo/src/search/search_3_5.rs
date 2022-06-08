@@ -1,13 +1,14 @@
 pub use __cargo_equip::prelude::*;
-use std::collections::HashSet;
+
 use proconio::input;
 
 fn main() {
     input! {
         s:String,
+        t:String,
     }
-    let x:HashSet<char> = s.chars().into_iter().collect();
-    println!("{}",x.len());
+
+    print!("{}",if s.contains(&t) {"Yes"} else {"No"});
     
 }
 

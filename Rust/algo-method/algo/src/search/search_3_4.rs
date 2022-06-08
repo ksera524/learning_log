@@ -1,13 +1,23 @@
 pub use __cargo_equip::prelude::*;
-use std::collections::HashSet;
+
 use proconio::input;
 
 fn main() {
     input! {
+        _n:u32,
         s:String,
+        t:String,
     }
-    let x:HashSet<char> = s.chars().into_iter().collect();
-    println!("{}",x.len());
+    let mut ans = 0;
+    let v:Vec<char> = s.chars().collect();
+    let w:Vec<char> = t.chars().collect();
+
+    for (i,j) in v.iter().zip(w.iter()){
+        if i != j{
+            ans += 1;
+        }
+    }
+    print!("{}",&ans);
     
 }
 

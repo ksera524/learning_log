@@ -1,13 +1,20 @@
 pub use __cargo_equip::prelude::*;
-use std::collections::HashSet;
+
 use proconio::input;
 
 fn main() {
     input! {
-        s:String,
+        n:i32,
+        k:i32,
     }
-    let x:HashSet<char> = s.chars().into_iter().collect();
-    println!("{}",x.len());
+    let mut ans = 0;
+
+    for i in (1..=n){
+        let cnt = (1..=i).map(|x| i % x ).filter(|x|x == &0).count();
+        if cnt == k as usize {ans += 1}
+    }
+
+    println!("{}",&ans);
     
 }
 

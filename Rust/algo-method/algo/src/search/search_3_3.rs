@@ -1,13 +1,20 @@
 pub use __cargo_equip::prelude::*;
-use std::collections::HashSet;
+
 use proconio::input;
 
 fn main() {
     input! {
         s:String,
     }
-    let x:HashSet<char> = s.chars().into_iter().collect();
-    println!("{}",x.len());
+    let mut ans = 0;
+    let v:Vec<char> = s.chars().collect();
+
+    for i in 1..v.len(){
+        if v[i] == v[i-1]{
+            ans += 1;
+        }
+    }
+    print!("{}",&ans);
     
 }
 
