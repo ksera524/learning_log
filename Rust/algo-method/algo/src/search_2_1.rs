@@ -4,9 +4,15 @@ use proconio::input;
 
 fn main() {
     input! {
-        s:String,
+        n:i32,
     }
-    println!("{}", if s == s.chars().rev().collect::<String>() {"Yes"} else {"No"})
+    let mut ans = 0;
+    for i in 0..=n{
+        if i % 2 != 0 && i % 3 != 0 && i % 5 != 0 {
+            ans += 1
+        }
+    }
+    println!("{}",ans);
     
 }
 

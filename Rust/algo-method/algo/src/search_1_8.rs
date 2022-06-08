@@ -4,10 +4,12 @@ use proconio::input;
 
 fn main() {
     input! {
-        s:String,
+        n:i32,
+        a:[i32; n],
     }
-    println!("{}", if s == s.chars().rev().collect::<String>() {"Yes"} else {"No"})
-    
+
+
+    println!("{}",a.iter().min().unwrap());
 }
 
 

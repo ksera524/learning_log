@@ -4,9 +4,19 @@ use proconio::input;
 
 fn main() {
     input! {
-        s:String,
+        n:i32,
     }
-    println!("{}", if s == s.chars().rev().collect::<String>() {"Yes"} else {"No"})
+    for i in 1..=n{
+        if i % 15 == 0{
+            println!("FizzBuzz");
+        } else if i % 3 == 0 {
+            println!("Fizz");
+        } else if i % 5 == 0{
+            println!("Buzz");
+        } else {
+            println!("{}",&i);
+        }
+    }
     
 }
 

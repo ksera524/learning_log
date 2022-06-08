@@ -4,9 +4,11 @@ use proconio::input;
 
 fn main() {
     input! {
-        s:String,
+        n:i32,
     }
-    println!("{}", if s == s.chars().rev().collect::<String>() {"Yes"} else {"No"})
+
+    
+    println!("{}",if &n > &1 && (1..=n).filter(|x| &n % x == 0).count() == 2 {"Yes"} else {"No"}  );
     
 }
 

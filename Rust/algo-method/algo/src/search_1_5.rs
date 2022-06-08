@@ -4,10 +4,21 @@ use proconio::input;
 
 fn main() {
     input! {
-        s:String,
+        n:usize,
+        a:[usize; n],
     }
-    println!("{}", if s == s.chars().rev().collect::<String>() {"Yes"} else {"No"})
-    
+
+    let mut ans = 0;
+    let mut val = a[0];
+
+    for i in 1..n{
+        if val < a[i]{
+            ans += 1;
+        }
+        val = a[i]
+    }
+
+    println!("{}",ans);
 }
 
 

@@ -4,10 +4,15 @@ use proconio::input;
 
 fn main() {
     input! {
-        s:String,
+        n:i32,
+        a:[i32; n],
     }
-    println!("{}", if s == s.chars().rev().collect::<String>() {"Yes"} else {"No"})
-    
+    let mut v = [0;10];
+
+    for i in a{
+        v[i as usize -1] += 1;
+    }
+    println!("{}",v.iter().position(|x| x == v.iter().max().unwrap()).unwrap() + 1)
 }
 
 

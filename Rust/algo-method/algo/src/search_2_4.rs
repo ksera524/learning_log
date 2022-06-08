@@ -4,9 +4,16 @@ use proconio::input;
 
 fn main() {
     input! {
-        s:String,
+        a:i32,
+        b:i32,
     }
-    println!("{}", if s == s.chars().rev().collect::<String>() {"Yes"} else {"No"})
+    let mut ans = 0;
+    for i in 1..a.max(b){
+        if a % i == 0 && b % i == 0{
+            ans = i;
+        } 
+    }
+    println!("{}",&ans)
     
 }
 

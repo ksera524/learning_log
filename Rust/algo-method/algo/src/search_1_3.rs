@@ -4,12 +4,13 @@ use proconio::input;
 
 fn main() {
     input! {
-        s:String,
+        n:i32,
+        a:[i32; n],
     }
-    println!("{}", if s == s.chars().rev().collect::<String>() {"Yes"} else {"No"})
-    
-}
+    let ans = a.iter().filter(|&x| x > &0).count();
 
+    println!("{}",ans);
+}
 
 #[cfg_attr(any(), rustfmt::skip)]
 #[allow(unused)]

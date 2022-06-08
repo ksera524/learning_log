@@ -4,10 +4,24 @@ use proconio::input;
 
 fn main() {
     input! {
-        s:String,
+        n:usize,
+        v:usize,
+        a:[usize; n],
     }
-    println!("{}", if s == s.chars().rev().collect::<String>() {"Yes"} else {"No"})
-    
+
+    let mut ans = 0;
+    if !a.contains(&v){
+        return println!("-1");
+        
+    }
+
+    for (i,value) in a.iter().enumerate(){
+        if value == &v{
+            ans = i;
+        }
+    }
+
+    println!("{}",ans);
 }
 
 

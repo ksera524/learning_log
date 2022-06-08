@@ -5,8 +5,9 @@ use proconio::input;
 fn main() {
     input! {
         s:String,
+        c:String,
     }
-    println!("{}", if s == s.chars().rev().collect::<String>() {"Yes"} else {"No"})
+    println!("{}", if s.contains(&c) {"Yes"}else {"No"})
     
 }
 
