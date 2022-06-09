@@ -3,20 +3,17 @@ use proconio::input;
 
 fn main() {
     input! {
-        n:i32,
-        s:String,
+        l:i32,
+        r:i32,
     }
 
     let mut ans = 0;
-    for i in 0..n{
-        for j in i+1..n{
-            let x:Vec<char> = s.chars().collect();
-            if &x[i as usize] == &x[j as usize]{ 
-                ans += 1;
-            }
+    let v:Vec<i32> = (l..=r).map(|x|x % 10 ).collect();
+    for (i,x) in v.iter().enumerate(){
+        for j in (i+1)..v.len(){
+            if x == &v[j as usize] {ans += 1}
         }
     }
-
 
     println!("{}",&ans);
     

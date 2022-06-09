@@ -4,19 +4,21 @@ use proconio::input;
 fn main() {
     input! {
         n:i32,
-        s:String,
+        k:i32,
+        a:[i32;n],
     }
 
     let mut ans = 0;
+
     for i in 0..n{
-        for j in i+1..n{
-            let x:Vec<char> = s.chars().collect();
-            if &x[i as usize] == &x[j as usize]{ 
-                ans += 1;
+        let s = a[i as usize];{
+            for j in i..n{
+                if s + a[j as usize] <= k{
+                    ans += 1;
+                }
             }
         }
     }
-
 
     println!("{}",&ans);
     

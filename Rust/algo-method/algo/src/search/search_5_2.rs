@@ -4,19 +4,15 @@ use proconio::input;
 fn main() {
     input! {
         n:i32,
-        s:String,
+        m:i32,
+        k:i32,
+        a:[i32;n],
+        b:[i32;m],
     }
 
     let mut ans = 0;
-    for i in 0..n{
-        for j in i+1..n{
-            let x:Vec<char> = s.chars().collect();
-            if &x[i as usize] == &x[j as usize]{ 
-                ans += 1;
-            }
-        }
-    }
 
+    b.iter().for_each(|b_i| {ans += a.iter().filter(|x| *x + b_i == k).count()});
 
     println!("{}",&ans);
     
