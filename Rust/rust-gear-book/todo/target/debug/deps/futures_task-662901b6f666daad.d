@@ -1,0 +1,11 @@
+c:\Users\ksera\Desktop\git\learning_log\Rust\rust-gear-book\todo\target\debug\deps\futures_task-662901b6f666daad.rmeta: C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\lib.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\spawn.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\arc_wake.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\waker.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\waker_ref.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\future_obj.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\noop_waker.rs
+
+c:\Users\ksera\Desktop\git\learning_log\Rust\rust-gear-book\todo\target\debug\deps\futures_task-662901b6f666daad.d: C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\lib.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\spawn.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\arc_wake.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\waker.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\waker_ref.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\future_obj.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\noop_waker.rs
+
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\lib.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\spawn.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\arc_wake.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\waker.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\waker_ref.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\future_obj.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\futures-task-0.3.21\src\noop_waker.rs:

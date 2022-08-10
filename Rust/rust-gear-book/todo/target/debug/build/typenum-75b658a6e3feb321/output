@@ -1,0 +1,2 @@
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=c:\Users\ksera\Desktop\git\learning_log\Rust\rust-gear-book\todo\target\debug\build\typenum-75b658a6e3feb321\out\consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=c:\Users\ksera\Desktop\git\learning_log\Rust\rust-gear-book\todo\target\debug\build\typenum-75b658a6e3feb321\out\op.rs

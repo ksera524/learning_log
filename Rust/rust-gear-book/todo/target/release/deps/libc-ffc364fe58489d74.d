@@ -1,0 +1,11 @@
+C:\Users\ksera\Desktop\git\learning_log\Rust\rust-gear-book\todo\target\release\deps\libc-ffc364fe58489d74.rmeta: C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\lib.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\macros.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\fixed_width_ints.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\windows\mod.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\windows\msvc\mod.rs
+
+C:\Users\ksera\Desktop\git\learning_log\Rust\rust-gear-book\todo\target\release\deps\liblibc-ffc364fe58489d74.rlib: C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\lib.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\macros.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\fixed_width_ints.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\windows\mod.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\windows\msvc\mod.rs
+
+C:\Users\ksera\Desktop\git\learning_log\Rust\rust-gear-book\todo\target\release\deps\libc-ffc364fe58489d74.d: C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\lib.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\macros.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\fixed_width_ints.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\windows\mod.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\windows\msvc\mod.rs
+
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\lib.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\macros.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\fixed_width_ints.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\windows\mod.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\libc-0.2.127\src\windows\msvc\mod.rs:

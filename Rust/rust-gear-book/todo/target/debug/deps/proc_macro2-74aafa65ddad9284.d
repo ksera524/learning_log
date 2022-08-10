@@ -1,0 +1,11 @@
+c:\Users\ksera\Desktop\git\learning_log\Rust\rust-gear-book\todo\target\debug\deps\proc_macro2-74aafa65ddad9284.rmeta: C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\lib.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\marker.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\parse.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\rcvec.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\detection.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\fallback.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\wrapper.rs
+
+c:\Users\ksera\Desktop\git\learning_log\Rust\rust-gear-book\todo\target\debug\deps\proc_macro2-74aafa65ddad9284.d: C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\lib.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\marker.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\parse.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\rcvec.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\detection.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\fallback.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\wrapper.rs
+
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\lib.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\marker.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\parse.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\rcvec.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\detection.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\fallback.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\proc-macro2-1.0.43\src\wrapper.rs:
