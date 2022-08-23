@@ -1,2 +1,0 @@
-cargo:rustc-env=TYPENUM_BUILD_OP=c:\Users\ksera\Desktop\git\learning_log\Rust\atcoder\target\debug\build\typenum-ddfc4f1d446414b1\out\consts.rs
-cargo:rustc-env=TYPENUM_BUILD_CONSTS=c:\Users\ksera\Desktop\git\learning_log\Rust\atcoder\target\debug\build\typenum-ddfc4f1d446414b1\out\op.rs
