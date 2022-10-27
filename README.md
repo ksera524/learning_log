@@ -81,6 +81,10 @@
 
 - [SPA セキュリティ超入門](https://www.docswell.com/s/ockeghem/K2PPNK-phpconf2022?utm_source=twitter&utm_medium=social&utm_campaign=singlepage)
 
+## GraphQL
+
+- [GraphQL と REST](https://hasura.io/learn/ja/graphql/intro-graphql/graphql-vs-rest/)
+
 ## データ構造とアルゴリズム
 
 - [アルゴリズム](https://home.wakatabe.com/ryo/wiki/index.php?%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0)
@@ -89,6 +93,8 @@
 ## [IT 企業研修まとめ](https://gist.github.com/gcchaan/02f4746a323acac4095c30e0783a3912)
 
 ## プログラミング言語
+
+- [Priject based learning](https://github.com/practical-tutorials/project-based-learning)
 
 - Rust
 
