@@ -41,6 +41,7 @@
 
 - Git
   - [Git’s database internals](https://github.blog/2022-08-29-gits-database-internals-i-packed-object-store/)
+  - [LearnGitBranching](https://learngitbranching.js.org/?locale=ja)
 - Github
   - Pending
 
@@ -120,5 +121,9 @@
   - [JavaScript 初級者から中級者になろう](https://uhyohyo.net/javascript/)
 
 - Typescript
+
   - [サバイバル Typescript](https://typescriptbook.jp/)
   - [Type level Typescript](https://type-level-typescript.com/)
+
+- React
+  - [How to build a movie search app using React Hooks](https://www.freecodecamp.org/news/how-to-build-a-movie-search-app-using-react-hooks-24eb72ddfaf7/)
