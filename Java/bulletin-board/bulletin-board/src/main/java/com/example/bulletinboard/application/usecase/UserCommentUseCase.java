@@ -3,6 +3,7 @@ package com.example.bulletinboard.application.usecase;
 
 import com.example.bulletinboard.domain.model.UserComment;
 import com.example.bulletinboard.domain.model.UserCommentRepository;
+import com.example.bulletinboard.domain.model.UserComments;
 import com.example.bulletinboard.presentation.form.CommentForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,5 +19,9 @@ public class UserCommentUseCase {
                 commentForm.getComment()
         );
         repository.save(userComment);
+    }
+
+    public UserComments read(){
+        return repository.select();
     }
 }

@@ -15,4 +15,10 @@ spring:
     init:
       schema-locations:
         - classpath:h2/schema.sql
+        - classpath:org/springframework/security/core/userdetails/jdbc/users.ddl
       mode: embedded # (DB????SQL????)????.EMBEDDED=h2db???????. ALWAYS????
+  logging:
+    level:
+      org:
+        springframework:
+          security: DEBUG

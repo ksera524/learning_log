@@ -1,6 +1,7 @@
 package com.example.bulletinboard.presentation;
 
 import com.example.bulletinboard.application.usecase.UserCommentUseCase;
+import com.example.bulletinboard.domain.model.UserComments;
 import com.example.bulletinboard.presentation.form.CommentForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,11 @@ public class BoardController {
 
     @GetMapping("/board")
     public ModelAndView viewBoard(ModelAndView modelAndView){
+        UserComments userComments = userCommentUseCase.read();
+
         modelAndView.setViewName("board");
         modelAndView.addObject("commentForm",new CommentForm());
+        modelAndView.addObject("comments",userComments.getValue());
         return modelAndView;
     }
 

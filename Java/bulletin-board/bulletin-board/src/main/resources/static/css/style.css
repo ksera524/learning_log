@@ -1,27 +1,11 @@
-body {
-    margin: 0;
-}
 header{
     display: flex;
     background-color: #f0f8ff;
     padding: 0.5rem 1rem;
+    justify-content: space-between; /*これが追加*/
 }
 
-#content {
-    display: flex;
-    background-color: #dae0e6;
-    padding: 0.5rem 1rem;
-}
-
-#main-area {
-    width: 60%;
-}
-#side-area {
-    width: 25%;
-}
-
-footer {
-    display: flex;
-    background-color: #f0f8ff;
-    padding: 0.5rem 1rem;
+#logo {
+    font-size: 1.5rem;
+    margin: 0.1rem 0.25rem;
 }
