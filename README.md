@@ -110,6 +110,7 @@
   - [Zero To Production In Rust Sample](https://www.lpalmieri.com/posts/2020-05-24-zero-to-production-0-foreword/)
 
   - [Writing an OS in Rust](https://os.phil-opp.com/ja/)
+  - [Rust design pattern](https://rust-unofficial.github.io/patterns/)
 
 - Go
 
