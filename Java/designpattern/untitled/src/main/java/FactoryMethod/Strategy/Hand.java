@@ -1,4 +1,4 @@
-package Strategy;
+package FactoryMethod.Strategy;
 
 public enum Hand {
         ROCK("グー",0),

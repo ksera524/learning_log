@@ -1,4 +1,4 @@
-package Strategy;
+package FactoryMethod.Strategy;
 
 public interface Strategy {
     public abstract Hand nextHand();

@@ -1,4 +1,4 @@
-package Strategy;
+package FactoryMethod.Strategy;
 
 import java.util.Random;
 
@@ -16,6 +16,6 @@ public class RandomStrategy implements Strategy{
 
     @Override
     public void study(boolean win) {
-        
+
     }
 }

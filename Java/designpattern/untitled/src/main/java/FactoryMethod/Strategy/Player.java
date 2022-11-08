@@ -1,4 +1,4 @@
-package Strategy;
+package FactoryMethod.Strategy;
 
 public class Player {
     private String name;
