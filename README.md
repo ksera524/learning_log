@@ -128,3 +128,10 @@
 
 - React
   - [How to build a movie search app using React Hooks](https://www.freecodecamp.org/news/how-to-build-a-movie-search-app-using-react-hooks-24eb72ddfaf7/)
+
+## おすすめしてもらった本
+
+- [Clean Code](https://www.amazon.co.jp/Clean-Code-%E3%82%A2%E3%82%B8%E3%83%A3%E3%82%A4%E3%83%AB%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%81%94%E4%BA%BA%E3%81%AE%E6%8A%80-Robert-C-Martin/dp/4048930591)
+- [CODE COMPLETE](https://www.amazon.co.jp/CODE-COMPLETE-%E7%AC%AC2%E7%89%88-%E4%B8%8A-%E5%AE%8C%E5%85%A8%E3%81%AA%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%82%92%E7%9B%AE%E6%8C%87%E3%81%97%E3%81%A6/dp/489100455X)
+- [詳解システムパフォーマンス](https://www.amazon.co.jp/s?k=%E8%A9%B3%E8%A7%A3%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9&adgrpid=61786953308&gclid=Cj0KCQiA1NebBhDDARIsAANiDD0VX9IXs_2xk4zS_IIraKar3fAqDDlOYzCtrJsHANGFJ9iPZQybiLgaAqPlEALw_wcB&hvadid=591887554539&hvdev=c&hvlocphy=1028853&hvnetw=g&hvqmt=e&hvrand=9554579947860432535&hvtargid=kwd-332157510422&hydadcr=27488_14541155&jp-ad-ap=0&tag=googhydr-22&ref=pd_sl_7glf0r7142_e)
+- [情熱プログラマー](https://www.amazon.co.jp/s?k=%E6%83%85%E7%86%B1%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%83%BC&crid=1QQN2LIGD63JF&sprefix=%E6%83%85%E7%86%B1%2Caps%2C188&ref=nb_sb_ss_ts-doa-p_4_2)
