@@ -27,6 +27,7 @@
   - [Kubernetes Security: 10 Best Practices from the Industry and Community](https://cast.ai/blog/kubernetes-security-10-best-practices/)
   - [Kubernetes ネットワーク 徹底解説](https://zenn.dev/taisho6339/books/fc6facfb640d242dc7ec)
   - [Kubernetes をとりまくコンテナランタイムの栄枯盛衰](https://speakerdeck.com/inductor/the-rise-and-fall-of-the-container-runtimes-surrounding-kubernetes)
+  - [Kubernetes がいかに自動化の考え方を変えたか?](https://deeeet.com/writing/2018/12/13/how-kubernetes-change-our-way-of-automation/)
 
 ## データベース
 
@@ -42,8 +43,11 @@
 - Git
   - [Git’s database internals](https://github.blog/2022-08-29-gits-database-internals-i-packed-object-store/)
   - [LearnGitBranching](https://learngitbranching.js.org/?locale=ja)
+  - [GitHub 演習](https://github.com/kaityo256/github)
 - Github
   - Pending
+- Gitlab
+  - [Gitlab handbook](https://about.gitlab.com/handbook/)
 
 ## CI/CD
 
@@ -85,6 +89,9 @@
 ## GraphQL
 
 - [GraphQL と REST](https://hasura.io/learn/ja/graphql/intro-graphql/graphql-vs-rest/)
+- [Production Ready GraphQL](https://productionreadygraphql.com/articles/)
+- [GraphQL の全体像と WebApp 開発のこれから](https://qiita.com/saboyutaka/items/171f7382cdf75b67d076)
+- [GraphQL が解決する問題とその先のユースケース](https://zenn.dev/saboyutaka/articles/07f1351a6b0049)
 
 ## データ構造とアルゴリズム
 
@@ -120,14 +127,17 @@
 
   - [JavaScript Primer](https://jsprimer.net/)
   - [JavaScript 初級者から中級者になろう](https://uhyohyo.net/javascript/)
+  - [Just Javascript](https://justjavascript.com/learn)
 
 - Typescript
 
   - [サバイバル Typescript](https://typescriptbook.jp/)
   - [Type level Typescript](https://type-level-typescript.com/)
+  - [How to build, test, and publish a TypeScript npm package in 2022](https://www.strictmode.io/articles/build-test-and-publish-npm-package-2022)
 
 - React
   - [How to build a movie search app using React Hooks](https://www.freecodecamp.org/news/how-to-build-a-movie-search-app-using-react-hooks-24eb72ddfaf7/)
+  - [React の流儀](https://ja.reactjs.org/docs/thinking-in-react.html)
 
 ## おすすめしてもらった本
 
