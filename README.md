@@ -52,7 +52,10 @@
 ## CI/CD
 
 - Github Actions
+
   - [How to build a CI/CD pipeline with GitHub Actions in four simple steps](https://github.blog/2022-02-02-build-ci-cd-pipeline-github-actions-four-steps/)
+
+- [継続的デリバリーのソフトウェア工学　もっと早く、もっと良いソフトウェアを作るための秘訣](https://www.amazon.co.jp/dp/B0BP9JRZS8/)
 
 ## Linux
 
@@ -85,6 +88,7 @@
 ## セキュリティ
 
 - [SPA セキュリティ超入門](https://www.docswell.com/s/ockeghem/K2PPNK-phpconf2022?utm_source=twitter&utm_medium=social&utm_campaign=singlepage)
+- [セキュア ソフトウェア開発 (LFD121-JP)](https://training.linuxfoundation.org/ja/training/developing-secure-software-lfd121-jp/)
 
 ## GraphQL
 
@@ -92,6 +96,7 @@
 - [Production Ready GraphQL](https://productionreadygraphql.com/articles/)
 - [GraphQL の全体像と WebApp 開発のこれから](https://qiita.com/saboyutaka/items/171f7382cdf75b67d076)
 - [GraphQL が解決する問題とその先のユースケース](https://zenn.dev/saboyutaka/articles/07f1351a6b0049)
+- [GraphQL Client Architecture Recommendation](https://engineering.mercari.com/blog/entry/20221215-graphql-client-architecture-recommendation/)
 
 ## データ構造とアルゴリズム
 
