@@ -1,0 +1,12 @@
+d:\git\learning_log\Rust\rustzero\hello\target\debug\deps\colorful-5dae4f03d978034b.rmeta: C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\lib.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\mod.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\colors.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\symbols.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\style.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\color_string.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\rgb.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\hsl.rs
+
+d:\git\learning_log\Rust\rustzero\hello\target\debug\deps\colorful-5dae4f03d978034b.d: C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\lib.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\mod.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\colors.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\symbols.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\style.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\color_string.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\rgb.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\hsl.rs
+
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\lib.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\mod.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\colors.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\symbols.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\style.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\color_string.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\rgb.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\colorful-0.2.2\src\core\hsl.rs:

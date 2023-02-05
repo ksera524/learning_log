@@ -1,0 +1,10 @@
+d:\git\learning_log\Rust\rustzero\hello\target\debug\deps\unic_langid_impl-e361d6e6568e9773.rmeta: C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\lib.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\errors.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\layout_table.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\parser\mod.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\parser\errors.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\subtags.rs
+
+d:\git\learning_log\Rust\rustzero\hello\target\debug\deps\unic_langid_impl-e361d6e6568e9773.d: C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\lib.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\errors.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\layout_table.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\parser\mod.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\parser\errors.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\subtags.rs
+
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\lib.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\errors.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\layout_table.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\parser\mod.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\parser\errors.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\unic-langid-impl-0.8.0\src\subtags.rs:

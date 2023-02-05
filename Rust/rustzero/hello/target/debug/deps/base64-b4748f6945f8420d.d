@@ -1,0 +1,12 @@
+d:\git\learning_log\Rust\rustzero\hello\target\debug\deps\base64-b4748f6945f8420d.rmeta: C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\lib.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\chunked_encoder.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\display.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\tables.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\write\mod.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\write\encoder.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\encode.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\decode.rs
+
+d:\git\learning_log\Rust\rustzero\hello\target\debug\deps\base64-b4748f6945f8420d.d: C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\lib.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\chunked_encoder.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\display.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\tables.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\write\mod.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\write\encoder.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\encode.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\decode.rs
+
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\lib.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\chunked_encoder.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\display.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\tables.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\write\mod.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\write\encoder.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\encode.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\base64-0.10.1\src\decode.rs:

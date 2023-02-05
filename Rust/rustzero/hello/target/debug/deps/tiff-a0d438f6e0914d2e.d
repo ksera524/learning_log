@@ -1,0 +1,12 @@
+d:\git\learning_log\Rust\rustzero\hello\target\debug\deps\tiff-a0d438f6e0914d2e.rmeta: C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\lib.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\decoder\mod.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\decoder\ifd.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\decoder\stream.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\encoder\mod.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\encoder\colortype.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\encoder\writer.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\error.rs
+
+d:\git\learning_log\Rust\rustzero\hello\target\debug\deps\tiff-a0d438f6e0914d2e.d: C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\lib.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\decoder\mod.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\decoder\ifd.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\decoder\stream.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\encoder\mod.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\encoder\colortype.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\encoder\writer.rs C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\error.rs
+
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\lib.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\decoder\mod.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\decoder\ifd.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\decoder\stream.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\encoder\mod.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\encoder\colortype.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\encoder\writer.rs:
+C:\Users\ksera\.cargo\registry\src\github.com-1ecc6299db9ec823\tiff-0.3.1\src\error.rs:
