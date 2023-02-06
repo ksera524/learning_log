@@ -4,6 +4,7 @@ use std::{
     mem::take,
 };
 
+#[derive(Debug)]
 pub enum AST{
     Char(char),
     Plus(Box<AST>),
@@ -46,7 +47,7 @@ impl Display for ParseError{
 
 impl Error for ParseError {}
 
-fn parse_escape(pos:usize,c:char) -> Result(AST,ParseError){
+fn parse_escape(pos:usize,c:char) -> Result<AST,ParseError>{
     match c {
         '\\' |  '(' | ')' | '|' | '+' | '*' | '?' => Ok(AST::Char(c)),
         _ => {
@@ -80,7 +81,7 @@ fn parse_plus_star_question(
     }
 }
 
-fn fold_or(mut seq_or:Vec<AST>) -> Option(AST){
+fn fold_or(mut seq_or:Vec<AST>) -> Option<AST>{
     if seq_or.len() > 1 {
         let mut ast = seq_or.pop().unwrap();
         seq_or.reverse();
@@ -128,18 +129,18 @@ pub fn parse(expr: &str) -> Result<AST,ParseError>{
                         seq = prev;
                         seq_or = prev_or;
                     } else {
-                        return Err(Box::new(ParseError::InvaliedRightParen(i)));
+                        return Err(ParseError::InvaliedRightParen(i));
                     }
                     '|' => {
                         if seq.is_empty(){
-                            return Err(Box::new(ParseError::NoPrev(i)))
+                            return Err(ParseError::NoPrev(i))
                         } else {
                             let prev = take(&mut seq);
                             seq_or.push(AST::Seq(prev));
                         }
                     }
                     '\\' => state = ParseState::Escape,
-                    _ => seq.push(AST::Seq(prev)),
+                    _ => seq.push(AST::Char(c)),
                 };
             }
             ParseState::Escape => {
@@ -150,7 +151,7 @@ pub fn parse(expr: &str) -> Result<AST,ParseError>{
         }
     }
     if !stack.is_empty(){
-        return Err(Box::new(ParseError::NoRightParen));
+        return Err(ParseError::NoRightParen);
     }
 
     if !seq.is_empty(){
@@ -160,6 +161,6 @@ pub fn parse(expr: &str) -> Result<AST,ParseError>{
     if let Some(ast) = fold_or(seq_or){
         Ok(ast)
     } else {
-        Err(Box::new(ParseError::Empty))
+        Err(ParseError::Empty)
     }
 }
