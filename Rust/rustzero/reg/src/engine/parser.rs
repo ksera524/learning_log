@@ -113,23 +113,32 @@ pub fn parse(expr: &str) -> Result<AST,ParseError>{
                     '*' => parse_plus_star_question(&mut seq,PSQ::Star,i)?,
                     '?' => parse_plus_star_question(&mut seq,PSQ::Question,i)?,
                     '(' => {
+                        // 現在のコンテキストをスタックに追加し、
+                        // 現在のコンテキストを空の状態にする
                         let prev = take(&mut seq);
                         let prev_or = take(&mut seq_or);
-                        stack.push((prev,prev_or));
+                        stack.push((prev, prev_or));
                     }
-                    ')' => if let Some((mut prev,prev_or)) = stack.pop(){
-                        if !seq.is_empty(){
-                            seq_or.push(AST::Seq(seq))
-                        }
+                    ')' => {
+                        // 現在のコンテキストをスタックからポップ
+                        if let Some((mut prev, prev_or)) = stack.pop() {
+                            // "()"のように式が空の場合はpushしない
+                            if !seq.is_empty() {
+                                seq_or.push(AST::Seq(seq));
+                            }
 
-                        if let Some(ast) = fold_or(seq_or){
-                            prev.push(ast);
-                        }
+                            // Orを生成
+                            if let Some(ast) = fold_or(seq_or) {
+                                prev.push(ast);
+                            }
 
-                        seq = prev;
-                        seq_or = prev_or;
-                    } else {
-                        return Err(ParseError::InvaliedRightParen(i));
+                            // 以前のコンテキストを、現在のコンテキストにする
+                            seq = prev;
+                            seq_or = prev_or;
+                        } else {
+                            // "abc)"のように、開き括弧がないのに閉じ括弧がある場合はエラー
+                            return Err(ParseError::InvaliedRightParen(i));
+                        }
                     }
                     '|' => {
                         if seq.is_empty(){
