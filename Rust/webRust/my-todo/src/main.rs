@@ -1,15 +1,15 @@
-mod repositories;
 mod handlers;
+mod repositories;
 
-use crate::repositories::{TodoRepository,TodoRepositoryForMemory};
+use crate::repositories::{TodoRepository, TodoRepositoryForMemory};
 use axum::{
     extract::Extension,
-    routing::{get,post},
+    routing::{get, post},
     Router,
 };
-use handlers::create_todo;
+use handlers::{find_all, create_todo, delete_todo, find_todo, update_todo};
 use std::net::SocketAddr;
-use std::{env,sync::Arc};
+use std::{env, sync::Arc};
 
 
 #[tokio::main]
@@ -32,7 +32,11 @@ async fn main() {
 fn create_app<T:TodoRepository> (repository:T) -> Router{
     Router::new()
         .route("/", get(root))
-        .route("/todos", post(create_todo::<T>))
+        .route("/todos", post(create_todo::<T>).get(find_all::<T>))
+        .route("/todos/:id", 
+            get(find_todo::<T>)
+                    .patch(update_todo::<T>)
+                    .delete(delete_todo::<T>),)
         .layer(Extension(Arc::new(repository)))
 }
 
