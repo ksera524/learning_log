@@ -1,0 +1,27 @@
+{
+  "name": "my-next-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@types/draft-convert": "^2.1.4",
+    "@types/draft-js": "^0.11.10",
+    "@types/node": "18.15.11",
+    "@types/react": "18.0.31",
+    "@types/react-dom": "18.0.11",
+    "draft-convert": "^2.1.13",
+    "draft-js": "^0.11.7",
+    "draft-js-export-html": "^1.4.1",
+    "eslint": "8.37.0",
+    "eslint-config-next": "13.2.4",
+    "next": "^13.2.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "5.0.2"
+  }
+}
