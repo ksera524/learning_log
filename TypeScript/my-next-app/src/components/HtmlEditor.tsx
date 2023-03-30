@@ -2,7 +2,6 @@ import { useState } from "react";
 import { EditorState, ContentState } from "draft-js";
 import { convertFromHTML } from "draft-convert";
 import { convertToHTML } from "draft-convert";
-import { Toolbar } from "./Toolbar";
 
 type HtmlEditorProps = {
   onChange: (html: string) => void;
@@ -20,8 +19,22 @@ const HtmlEditor = ({ onChange, html }: HtmlEditorProps) => {
     setEditorState(EditorState.createWithContent(contentState));
   };
 
+  const onInsertTemplateClick = () => {
+    const contentState = ContentState.createFromText("<h1>Hello roeld</h1>");
+    const templateHtml = convertToHTML(contentState)
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace("<p>", "")
+      .replace("</p>", "");
+    const newHtml = `${html}${templateHtml}`;
+    onChange(newHtml);
+    const newContentState = htmlToDraft(newHtml);
+    setEditorState(EditorState.createWithContent(newContentState));
+  };
+
   return (
     <div style={{ border: "1px solid black", padding: "10px", width: "50%" }}>
+      <Toolbar onInsertTemplateClick={onInsertTemplateClick} />
       <textarea value={html} onChange={onHtmlEditorStateChange} />
     </div>
   );
@@ -55,6 +68,20 @@ const convertToHtml = (content: ContentState) => {
 const convertFromHtml = (html: string) => {
   const contentState = htmlToDraft(html);
   return EditorState.createWithContent(contentState);
+};
+
+type ToolbarProps = {
+  onInsertTemplateClick: () => void;
+};
+
+const Toolbar = ({ onInsertTemplateClick }: ToolbarProps) => {
+  return (
+    <div style={{ marginBottom: "10px" }}>
+      <button type="button" onClick={onInsertTemplateClick}>
+        Insert Template
+      </button>
+    </div>
+  );
 };
 
 export { HtmlEditor, convertToHtml, convertFromHtml };
