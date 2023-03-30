@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { EditorState } from "draft-js";
-import {
-  DraftEditor,
-  HtmlEditor,
-  convertToHtml,
-  convertFromHtml,
-} from "../components/draft";
+import { DraftEditor } from "@/components/DraftEditor";
+import { HtmlEditor } from "@/components/HtmlEditor";
+import { convertToHtml } from "@/components/HtmlEditor";
+import { convertFromHtml } from "@/components/HtmlEditor";
 
 export default function Home() {
   const [editorEnable, setEditorEnable] = useState(false);
