@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { EditorState } from "draft-js";
-import { DraftEditor } from "@/components/DraftEditor";
+import { DraftEditor } from "@/components/ReactDraftEditor";
 import { HtmlEditor } from "@/components/HtmlEditor";
 import { convertToHtml } from "@/components/HtmlEditor";
 import { convertFromHtml } from "@/components/HtmlEditor";
