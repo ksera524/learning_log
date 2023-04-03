@@ -20,7 +20,7 @@ const HtmlEditor = ({ onChange, html }: HtmlEditorProps) => {
   };
 
   const onInsertTemplateClick = () => {
-    const contentState = ContentState.createFromText("<h1>Hello roeld</h1>");
+    const contentState = ContentState.createFromText("<h1>Hello World</h1>");
     const templateHtml = convertToHTML(contentState)
       .replace(/&lt;/g, "<")
       .replace(/&gt;/g, ">")

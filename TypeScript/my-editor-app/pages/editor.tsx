@@ -1,25 +1,24 @@
 import { EditorState } from "draft-js";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-
 import dynamic from "next/dynamic";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { useState } from "react";
 
 const Editor = dynamic(
   () => import("react-draft-wysiwyg").then((mod) => mod.Editor),
   { ssr: false }
 );
 
-type Props = {
-  onChange: (editorState: EditorState) => void;
-  editorState: EditorState;
-};
+const MyEditor = () => {
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
 
-const DraftEditor = ({ onChange, editorState }: Props) => {
   const onEditorStateChange = (newEditorState: EditorState) => {
-    onChange(newEditorState);
+    setEditorState(newEditorState);
   };
 
   return (
-    <div style={{ border: "1px solid black", padding: "10px", width: "50%" }}>
+    <div>
       <Editor
         editorState={editorState}
         onEditorStateChange={onEditorStateChange}
@@ -55,4 +54,4 @@ const DraftEditor = ({ onChange, editorState }: Props) => {
   );
 };
 
-export { DraftEditor };
+export default MyEditor;
