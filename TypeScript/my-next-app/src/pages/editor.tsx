@@ -1,4 +1,4 @@
-// pages/editor.tsx
+// src/pages/EditorPage.tsx
 import React, { useState, useEffect } from "react";
 import { EditorState } from "draft-js";
 import RichTextEditor from "../components/RichTextEditor";
