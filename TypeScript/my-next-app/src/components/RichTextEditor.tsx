@@ -22,6 +22,19 @@ const styleMap = {
   "32px": {
     fontSize: "32px",
   },
+  Arial: {
+    fontFamily: "Arial, sans-serif",
+  },
+  CourierNew: {
+    fontFamily: '"Courier New", Courier, monospace',
+  },
+  Georgia: {
+    fontFamily: "Georgia, serif",
+  },
+  TimesNewRoman: {
+    fontFamily: '"Times New Roman", Times, serif',
+  },
+  MS_Gothic: { fontFamily: '"MS Gothic", sans-serif' },
 };
 
 const RichTextEditor: React.FC<RichTextEditorProps> = ({
@@ -30,6 +43,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
 }) => {
   const editorRef = useRef<Editor>(null);
   const [currentFontSize, setCurrentFontSize] = useState("16px");
+  const [currentFontFamily, setCurrentFontFamily] = useState("Arial");
 
   const handleKeyCommand = (command: string, editorState: EditorState) => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
@@ -58,6 +72,12 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
     onChange(newEditorState);
   };
 
+  const applyFontFamily = (fontFamily: string) => {
+    const newEditorState = RichUtils.toggleInlineStyle(editorState, fontFamily);
+    setCurrentFontFamily(fontFamily);
+    onChange(newEditorState);
+  };
+
   return (
     <div>
       <div>
@@ -80,6 +100,16 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
           <option value="16px">16px</option>
           <option value="24px">24px</option>
           <option value="32px">32px</option>
+        </select>
+        <select
+          value={currentFontFamily}
+          onChange={(e) => applyFontFamily(e.target.value)}
+        >
+          <option value="Arial">Arial</option>
+          <option value="CourierNew">Courier New</option>
+          <option value="Georgia">Georgia</option>
+          <option value="TimesNewRoman">Times New Roman</option>
+          <option value="MS_Gothic">MS ゴシック</option>
         </select>
       </div>
       <div onClick={focusEditor}>
