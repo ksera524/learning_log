@@ -1,8 +1,11 @@
 // src/components/RichTextEditor.tsx
 import React, { useRef, useState } from "react";
-import { EditorState, RichUtils } from "draft-js";
+import { EditorState, RichUtils, Modifier, ContentBlock } from "draft-js";
 import { Editor } from "draft-js";
 import "draft-js/dist/Draft.css";
+import styles from "../../styles/RichTextEditor.module.css";
+import { Map as ImmutableMap } from "immutable";
+import Toolbar from "./Toolbar2";
 
 interface RichTextEditorProps {
   editorState: EditorState;
@@ -35,6 +38,10 @@ const styleMap = {
     fontFamily: '"Times New Roman", Times, serif',
   },
   MS_Gothic: { fontFamily: '"MS Gothic", sans-serif' },
+  LINK: {
+    color: "blue",
+    textDecoration: "underline",
+  },
 };
 
 const RichTextEditor: React.FC<RichTextEditorProps> = ({
@@ -78,45 +85,165 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
     onChange(newEditorState);
   };
 
+  const LinkSpan = (props: any) => {
+    const { children, block } = props;
+    const blockData = block.getData();
+    const url = blockData.get("data-href");
+
+    if (url) {
+      return (
+        <a href={url} style={{ color: "blue", textDecoration: "underline" }}>
+          {children}
+        </a>
+      );
+    } else {
+      return <span>{children}</span>;
+    }
+  };
+
+  const customBlockRendererFn = (contentBlock: ContentBlock) => {
+    const type = contentBlock.getType();
+    if (type === "atomic") {
+      return {
+        component: LinkSpan,
+        editable: true,
+        props: {
+          block: contentBlock,
+        },
+      };
+    }
+  };
+
+  const addLink = () => {
+    const selection = editorState.getSelection();
+    if (!selection.isCollapsed()) {
+      const url = window.prompt("Enter the URL of the link:", "https://");
+      if (url) {
+        const updatedEditorState = createLink(editorState, url);
+        onChange(updatedEditorState);
+        setTimeout(() => editorRef.current?.focus(), 0);
+      }
+    } else {
+      alert("Please select the text you want to turn into a link.");
+    }
+  };
+
+  const createLink = (editorState: EditorState, url: string) => {
+    const contentState = editorState.getCurrentContent();
+    const contentStateWithEntity = contentState.createEntity(
+      "LINK",
+      "MUTABLE",
+      { url }
+    );
+    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+    const newEditorState = EditorState.set(editorState, {
+      currentContent: contentStateWithEntity,
+    });
+
+    const selection = editorState.getSelection();
+    const newContentState = Modifier.applyEntity(
+      newEditorState.getCurrentContent(),
+      selection,
+      entityKey
+    );
+    const updatedEditorState = EditorState.push(
+      editorState,
+      newContentState,
+      "apply-entity"
+    );
+
+    return updatedEditorState;
+  };
+
+  const textAlignLeft = () => {
+    changeTextAlignment("left");
+  };
+
+  const textAlignCenter = () => {
+    changeTextAlignment("center");
+  };
+
+  const textAlignRight = () => {
+    changeTextAlignment("right");
+  };
+
+  const changeTextAlignment = (alignment: string) => {
+    const contentState = editorState.getCurrentContent();
+    const selection = editorState.getSelection();
+    const blockData = ImmutableMap<string, string>().set(
+      "textAlign",
+      alignment
+    );
+
+    const newContentState = Modifier.setBlockData(
+      contentState,
+      selection,
+      blockData
+    );
+    const updatedEditorState = EditorState.push(
+      editorState,
+      newContentState,
+      "change-block-data"
+    );
+
+    onChange(updatedEditorState);
+  };
+
+  const blockStyleFn = (contentBlock: ContentBlock) => {
+    const textAlign = contentBlock.getData().get("textAlign");
+    return textAlign ? `textAlign-${textAlign}` : "";
+  };
+
+  const increaseIndent = () => {
+    changeIndent(true);
+  };
+
+  const decreaseIndent = () => {
+    changeIndent(false);
+  };
+
+  const changeIndent = (increase: boolean) => {
+    const contentState = editorState.getCurrentContent();
+    const selection = editorState.getSelection();
+    const newContentState = Modifier.adjustBlockDepth(
+      contentState,
+      selection,
+      increase ? 1 : -1
+    );
+    const updatedEditorState = EditorState.push(
+      editorState,
+      newContentState,
+      "adjust-depth"
+    );
+
+    onChange(updatedEditorState);
+  };
+
   return (
     <div>
-      <div>
-        <button onClick={() => toggleStyle("inline", "BOLD")}>Bold</button>
-        <button onClick={() => toggleStyle("inline", "ITALIC")}>Italic</button>
-        <button onClick={() => toggleStyle("inline", "UNDERLINE")}>
-          Underline
-        </button>
-        <button onClick={() => toggleStyle("block", "unordered-list-item")}>
-          Bullet List
-        </button>
-        <button onClick={() => toggleStyle("block", "ordered-list-item")}>
-          Numbered List
-        </button>
-        <select
-          value={currentFontSize}
-          onChange={(e) => applyFontSize(e.target.value)}
-        >
-          <option value="12px">12px</option>
-          <option value="16px">16px</option>
-          <option value="24px">24px</option>
-          <option value="32px">32px</option>
-        </select>
-        <select
-          value={currentFontFamily}
-          onChange={(e) => applyFontFamily(e.target.value)}
-        >
-          <option value="Arial">Arial</option>
-          <option value="CourierNew">Courier New</option>
-          <option value="Georgia">Georgia</option>
-          <option value="TimesNewRoman">Times New Roman</option>
-          <option value="MS_Gothic">MS ゴシック</option>
-        </select>
-      </div>
-      <div onClick={focusEditor}>
+      <Toolbar
+        toggleStyle={toggleStyle}
+        applyFontSize={applyFontSize}
+        applyFontFamily={applyFontFamily}
+        addLink={addLink}
+        textAlignLeft={textAlignLeft}
+        textAlignCenter={textAlignCenter}
+        textAlignRight={textAlignRight}
+        increaseIndent={increaseIndent}
+        decreaseIndent={decreaseIndent}
+        currentFontSize={currentFontSize}
+        currentFontFamily={currentFontFamily}
+      />
+      <div
+        onClick={focusEditor}
+        className={`public-DraftEditor-root ${styles.publicDraftEditorContent}`}
+      >
         <Editor
           ref={editorRef}
           editorState={editorState}
           handleKeyCommand={handleKeyCommand}
+          blockRendererFn={customBlockRendererFn}
+          blockStyleFn={blockStyleFn}
           onChange={onChange}
           customStyleMap={styleMap}
         />
