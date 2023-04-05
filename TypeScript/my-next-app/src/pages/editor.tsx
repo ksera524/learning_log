@@ -1,29 +1,16 @@
-// src/pages/EditorPage.tsx
-import React, { useState, useEffect } from "react";
-import { EditorState } from "draft-js";
-import RichTextEditor from "../components/RichTextEditor";
+import { useState } from "react";
+import Editor from "@/components/lexical";
 
-const EditorPage: React.FC = () => {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const [editorEnable, setEditorEnable] = useState(false);
+const EditorPage = () => {
+  const [content, setContent] = useState("");
 
-  useEffect(() => {
-    setEditorEnable(true);
-  }, []);
+  const handleChange = (value: string) => {
+    setContent(value);
+  };
 
   return (
-    <div className="container">
-      <h1>Rich Text Editor</h1>
-      {editorEnable && (
-        <RichTextEditor onChange={setEditorState} editorState={editorState} />
-      )}
-      <style jsx>{`
-        .container {
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 2rem;
-        }
-      `}</style>
+    <div>
+      <Editor />
     </div>
   );
 };

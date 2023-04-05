@@ -1,0 +1,36 @@
+/* styles/quill-custom.css */
+
+.ql-snow .ql-size {
+  width: 60px;
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item::before {
+  content: attr(data-value) "px";
+  font-size: 14px;
+}
+
+/* styles/quill-custom.css */
+
+/* 既存のスタイルはそのままで、新しいスタイルを追加します */
+.ql-snow .ql-editor .ql-size-10px {
+  font-size: 10px;
+}
+.ql-snow .ql-editor .ql-size-12px {
+  font-size: 12px;
+}
+.ql-snow .ql-editor .ql-size-14px {
+  font-size: 14px;
+}
+.ql-snow .ql-editor .ql-size-16px {
+  font-size: 16px;
+}
+.ql-snow .ql-editor .ql-size-18px {
+  font-size: 18px;
+}
+.ql-snow .ql-editor .ql-size-20px {
+  font-size: 20px;
+}
+.ql-snow .ql-editor .ql-size-24px {
+  font-size: 24px;
+}
