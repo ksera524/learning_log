@@ -5,7 +5,8 @@
 - [MDN](https://developer.mozilla.org/ja/docs/Web)
 - [w3Schools](https://www.w3schools.com/)
 - [web.dev](https://web.dev/learn/)
-- [The Missing Semester of Your CS Education](https://missing-semester-jp.github.io/)
+
+* [ ] [The Missing Semester of Your CS Education](https://missing-semester-jp.github.io/)
 
 ## 設計
 

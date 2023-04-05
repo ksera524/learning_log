@@ -28,7 +28,8 @@ const DynamicReactQuill: React.FC<DynamicReactQuillProps> = ({
   const toolbarOptions = [
     ["bold", "italic", "underline", "strike"], // toggled buttons
     ["blockquote", "code-block"],
-
+    ["link"], // ハイパーリンク機能を追加
+    ["image"],
     [{ header: 1 }, { header: 2 }], // custom button values
     [{ list: "ordered" }, { list: "bullet" }],
     [{ script: "sub" }, { script: "super" }], // superscript/subscript
