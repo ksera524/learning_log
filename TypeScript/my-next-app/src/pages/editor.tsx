@@ -1,16 +1,18 @@
-import { useState } from "react";
-import Editor from "@/components/lexical";
+import React, { useState } from "react";
+import Editor from "../components/Quill/Editor";
+import HtmlTextarea from "../components/Quill/HtmlTextarea";
 
-const EditorPage = () => {
+const EditorPage: React.FC = () => {
   const [content, setContent] = useState("");
 
-  const handleChange = (value: string) => {
-    setContent(value);
-  };
-
   return (
-    <div>
-      <Editor />
+    <div style={{ display: "flex", height: "100vh" }}>
+      <div style={{ flex: 1 }}>
+        <Editor content={content} setContent={setContent} />
+      </div>
+      <div style={{ flex: 1 }}>
+        <HtmlTextarea content={content} setContent={setContent} />
+      </div>
     </div>
   );
 };
