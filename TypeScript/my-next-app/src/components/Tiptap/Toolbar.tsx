@@ -1,7 +1,6 @@
 // components/Tiptap/Toolbar.tsx
 import React from "react";
 import { Editor } from "@tiptap/react";
-import FontFamily from "@tiptap/extension-font-family";
 
 interface ToolbarProps {
   editor: Editor | null;
@@ -18,6 +17,8 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
     { label: "serif", value: "serif" },
     { label: "monospace", value: "monospace" },
     { label: "cursive", value: "cursive" },
+    { label: "MS ゴシック", value: "MS Gothic, MS ゴシック" },
+    { label: "Times New Roman", value: "Times New Roman, Times, serif" },
   ];
 
   return (

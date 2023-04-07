@@ -1,8 +1,15 @@
 // pages/editor.tsx
 import React, { useState, useEffect } from "react";
 import { Editor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import Document from "@tiptap/extension-document";
+import FontFamily from "@tiptap/extension-font-family";
+import Paragraph from "@tiptap/extension-paragraph";
+import Text from "@tiptap/extension-text";
+import TextStyle from "@tiptap/extension-text-style";
+import Bold from "@tiptap/extension-bold";
+import Italic from "@tiptap/extension-italic";
 import Underline from "@tiptap/extension-underline";
+
 import TiptapEditor from "../components/Tiptap/TiptapEditor";
 import SyncedTextarea from "../components/Tiptap/SyncedTextarea";
 import Toolbar from "../components/Tiptap/Toolbar";
@@ -14,7 +21,16 @@ const EditorPage: React.FC = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const newEditor = new Editor({
-        extensions: [StarterKit, Underline],
+        extensions: [
+          Document,
+          Paragraph,
+          Text,
+          TextStyle,
+          FontFamily,
+          Bold,
+          Italic,
+          Underline,
+        ],
         onUpdate: ({ editor }) => {
           setContent(editor.getHTML());
         },
@@ -32,7 +48,7 @@ const EditorPage: React.FC = () => {
     <div>
       <Toolbar editor={editor} />
       <div style={{ display: "flex" }}>
-        <div style={{ width: "50%" }}>
+        <div style={{ flex: 1 }}>
           <TiptapEditor editor={editor} />
         </div>
         <SyncedTextarea
@@ -41,6 +57,10 @@ const EditorPage: React.FC = () => {
             setContent(newContent);
             editor?.commands.setContent(newContent);
           }}
+        />
+        <div
+          style={{ flex: 1 }}
+          dangerouslySetInnerHTML={{ __html: content }}
         />
       </div>
     </div>
