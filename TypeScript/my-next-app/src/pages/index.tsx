@@ -1,37 +1,50 @@
-import { useEffect, useState } from "react";
-import { EditorState } from "draft-js";
-import { DraftEditor } from "@/components/ReactDraftEditor";
-import { HtmlEditor } from "@/components/HtmlEditor";
-import { convertToHtml } from "@/components/HtmlEditor";
-import { convertFromHtml } from "@/components/HtmlEditor";
+// pages/editor.tsx
+import React, { useState, useEffect } from "react";
+import { Editor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Underline from "@tiptap/extension-underline";
+import TiptapEditor from "../components/Tiptap/TiptapEditor";
+import SyncedTextarea from "../components/Tiptap/SyncedTextarea";
+import Toolbar from "../components/Tiptap/Toolbar";
 
-export default function Home() {
-  const [editorEnable, setEditorEnable] = useState(false);
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const [html, setHtml] = useState("");
+const EditorPage: React.FC = () => {
+  const [content, setContent] = useState("");
+  const [editor, setEditor] = useState<Editor | null>(null);
 
   useEffect(() => {
-    setEditorEnable(true);
+    if (typeof window !== "undefined") {
+      const newEditor = new Editor({
+        extensions: [StarterKit, Underline],
+        onUpdate: ({ editor }) => {
+          setContent(editor.getHTML());
+        },
+      });
+      setEditor(newEditor);
+
+      // Clean up on component unmount
+      return () => {
+        newEditor.destroy();
+      };
+    }
   }, []);
 
-  const onEditorStateChange = (newEditorState: EditorState) => {
-    setEditorState(newEditorState);
-    const html = convertToHtml(newEditorState.getCurrentContent());
-    setHtml(html);
-  };
-
-  const onHtmlChange = (newHtml: string) => {
-    setHtml(newHtml);
-    const editorState = convertFromHtml(newHtml);
-    setEditorState(editorState);
-  };
-
   return (
-    <div style={{ display: "flex" }}>
-      {editorEnable && (
-        <DraftEditor editorState={editorState} onChange={onEditorStateChange} />
-      )}
-      <HtmlEditor html={html} onChange={onHtmlChange} />
+    <div>
+      <Toolbar editor={editor} />
+      <div style={{ display: "flex" }}>
+        <div style={{ width: "50%" }}>
+          <TiptapEditor editor={editor} />
+        </div>
+        <SyncedTextarea
+          content={content}
+          onContentChange={(newContent) => {
+            setContent(newContent);
+            editor?.commands.setContent(newContent);
+          }}
+        />
+      </div>
     </div>
   );
-}
+};
+
+export default EditorPage;
