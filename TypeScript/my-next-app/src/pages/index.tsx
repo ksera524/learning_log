@@ -9,7 +9,7 @@ import TextStyle from "@tiptap/extension-text-style";
 import Bold from "@tiptap/extension-bold";
 import Italic from "@tiptap/extension-italic";
 import Underline from "@tiptap/extension-underline";
-
+import FontSize from "@tobiasafischer/tiptap-extension-font-size";
 import TiptapEditor from "../components/Tiptap/TiptapEditor";
 import SyncedTextarea from "../components/Tiptap/SyncedTextarea";
 import Toolbar from "../components/Tiptap/Toolbar";
@@ -27,6 +27,7 @@ const EditorPage: React.FC = () => {
           Text,
           TextStyle,
           FontFamily,
+          FontSize,
           Bold,
           Italic,
           Underline,
