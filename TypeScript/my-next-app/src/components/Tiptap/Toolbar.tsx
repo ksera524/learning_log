@@ -84,6 +84,14 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
           </option>
         ))}
       </select>
+      <input
+        type="color"
+        style={{ marginLeft: "0.5rem" }}
+        onChange={(event) => {
+          const color = event.target.value;
+          editor.chain().focus().setColor(color).run();
+        }}
+      />
     </div>
   );
 };
