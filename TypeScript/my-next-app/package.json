@@ -14,6 +14,7 @@
     "@tinymce/tinymce-react": "^4.3.0",
     "@tiptap/extension-color": "^2.0.2",
     "@tiptap/extension-font-family": "^2.0.2",
+    "@tiptap/extension-link": "^2.0.2",
     "@tiptap/extension-text-style": "^2.0.2",
     "@tiptap/extension-underline": "^2.0.2",
     "@tiptap/pm": "^2.0.2",

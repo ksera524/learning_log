@@ -1,5 +1,5 @@
 // components/Tiptap/Toolbar.tsx
-import React from "react";
+import React, { useCallback } from "react";
 import { Editor } from "@tiptap/react";
 
 interface ToolbarProps {
@@ -32,6 +32,26 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
     { label: "36pt", value: "36" },
     { label: "48pt", value: "48" },
   ];
+
+  const setLink = useCallback(() => {
+    const previousUrl = editor.getAttributes("link").href;
+    const url = window.prompt("URL", previousUrl);
+
+    // cancelled
+    if (url === null) {
+      return;
+    }
+
+    // empty
+    if (url === "") {
+      editor.chain().focus().extendMarkRange("link").unsetLink().run();
+
+      return;
+    }
+
+    // update link
+    editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+  }, [editor]);
 
   return (
     <div style={{ display: "flex", marginBottom: "1rem" }}>
@@ -92,6 +112,18 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
           editor.chain().focus().setColor(color).run();
         }}
       />
+      <button
+        onClick={setLink}
+        className={editor.isActive("link") ? "is-active" : ""}
+      >
+        setLink
+      </button>
+      <button
+        onClick={() => editor.chain().focus().unsetLink().run()}
+        disabled={!editor.isActive("link")}
+      >
+        unsetLink
+      </button>
     </div>
   );
 };

@@ -11,6 +11,7 @@ import Italic from "@tiptap/extension-italic";
 import Underline from "@tiptap/extension-underline";
 import FontSize from "@tobiasafischer/tiptap-extension-font-size";
 import TiptapEditor from "../components/Tiptap/TiptapEditor";
+import Link from "@tiptap/extension-link";
 import { Color } from "@tiptap/extension-color";
 import SyncedTextarea from "../components/Tiptap/SyncedTextarea";
 import Toolbar from "../components/Tiptap/Toolbar";
@@ -33,6 +34,7 @@ const EditorPage: React.FC = () => {
           Italic,
           Underline,
           Color,
+          Link,
         ],
         onUpdate: ({ editor }) => {
           setContent(editor.getHTML());
