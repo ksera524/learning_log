@@ -14,7 +14,10 @@ import FontSize from "@tobiasafischer/tiptap-extension-font-size";
 import TiptapEditor from "../components/Tiptap/TiptapEditor";
 import Link from "@tiptap/extension-link";
 import TextAlign from "@tiptap/extension-text-align";
+import ListItem from "@tiptap/extension-list-item";
 import { Color } from "@tiptap/extension-color";
+import OrderedList from "@tiptap/extension-ordered-list";
+import BulletList from "@tiptap/extension-bullet-list";
 import SyncedTextarea from "../components/Tiptap/SyncedTextarea";
 import Toolbar from "../components/Tiptap/Toolbar";
 
@@ -39,6 +42,9 @@ const EditorPage: React.FC = () => {
           Color,
           Link,
           TextAlign.configure({ types: ["heading", "paragraph"] }),
+          ListItem,
+          OrderedList,
+          BulletList,
         ],
         onUpdate: ({ editor }) => {
           setContent(editor.getHTML());

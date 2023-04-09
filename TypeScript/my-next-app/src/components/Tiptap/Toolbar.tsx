@@ -146,6 +146,18 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       >
         Right
       </button>
+      <button
+        onClick={() => editor?.chain().focus().toggleOrderedList().run()}
+        style={{ marginLeft: "0.5rem" }}
+      >
+        Ordered List
+      </button>
+      <button
+        onClick={() => editor?.chain().focus().toggleBulletList().run()}
+        style={{ marginLeft: "0.5rem" }}
+      >
+        Bullet List
+      </button>
     </div>
   );
 };
