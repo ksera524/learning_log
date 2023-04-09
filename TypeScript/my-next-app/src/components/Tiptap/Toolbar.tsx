@@ -146,6 +146,13 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       >
         Right
       </button>
+
+      <button
+        onClick={() => editor?.chain().focus().toggleBulletList().run()}
+        style={{ marginLeft: "0.5rem" }}
+      >
+        Bullet List
+      </button>
       <button
         onClick={() => editor?.chain().focus().toggleOrderedList().run()}
         style={{ marginLeft: "0.5rem" }}
@@ -153,10 +160,18 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
         Ordered List
       </button>
       <button
-        onClick={() => editor?.chain().focus().toggleBulletList().run()}
+        onClick={() => editor.chain().focus().sinkListItem("listItem").run()}
         style={{ marginLeft: "0.5rem" }}
+        disabled={!editor.can().sinkListItem("listItem")}
       >
-        Bullet List
+        sinkListItem
+      </button>
+      <button
+        onClick={() => editor.chain().focus().liftListItem("listItem").run()}
+        style={{ marginLeft: "0.5rem" }}
+        disabled={!editor.can().liftListItem("listItem")}
+      >
+        liftListItem
       </button>
     </div>
   );
