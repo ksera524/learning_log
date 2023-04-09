@@ -53,6 +53,10 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
     editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
   }, [editor]);
 
+  const handleTextAlign = (align: string) => {
+    editor.chain().focus().setTextAlign(align).run();
+  };
+
   return (
     <div style={{ display: "flex", marginBottom: "1rem" }}>
       <button onClick={() => editor.chain().focus().toggleBold().run()}>
@@ -123,6 +127,24 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
         disabled={!editor.isActive("link")}
       >
         unsetLink
+      </button>
+      <button
+        onClick={() => handleTextAlign("left")}
+        style={{ marginLeft: "0.5rem" }}
+      >
+        Left
+      </button>
+      <button
+        onClick={() => handleTextAlign("center")}
+        style={{ marginLeft: "0.5rem" }}
+      >
+        Center
+      </button>
+      <button
+        onClick={() => editor.chain().focus().setTextAlign("right").run()}
+        style={{ marginLeft: "0.5rem" }}
+      >
+        Right
       </button>
     </div>
   );
