@@ -197,7 +197,7 @@
   - [ ] [reactjs-interview-questions](https://github.com/sudheerj/reactjs-interview-questions)
   - [ ] [TypeScript: ReactNode 型と ReactElement 型と ReactChild 型](https://dackdive.hateblo.jp/entry/2019/08/07/090000)
   - [ ] [bulletproof-react](https://github.com/alan2207/bulletproof-react)
-  - [ ] [バックエンドエンジニアのための（かどうかは本当はよく分からないけど、とにかく書いてみる）React 入門](https://enakai00.hatenablog.com/entry/2023/03/09/133119)
+  - [x] [バックエンドエンジニアのための（かどうかは本当はよく分からないけど、とにかく書いてみる）React 入門](https://enakai00.hatenablog.com/entry/2023/03/09/133119)
 
 - Java
 
