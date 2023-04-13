@@ -185,7 +185,7 @@
 
 - Typescript
 
-  - [ ] [サバイバル Typescript](https://typescriptbook.jp/)
+  - [x] [サバイバル Typescript](https://typescriptbook.jp/)
   - [ ] [Type level Typescript](https://type-level-typescript.com/)
   - [ ] [How to build, test, and publish a TypeScript npm package in 2022](https://www.strictmode.io/articles/build-test-and-publish-npm-package-2022)
   - [ ] [Design Patterns in TypeScript](https://refactoring.guru/ja)
