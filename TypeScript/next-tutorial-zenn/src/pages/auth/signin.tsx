@@ -1,5 +1,6 @@
 import { getProviders, signIn } from "next-auth/react";
 import { InferGetServerSidePropsType } from "next";
+import Image from "next/image";
 
 const SignIn = ({
   providers,
