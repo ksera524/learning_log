@@ -149,12 +149,9 @@
   - [ ] [Rust で Web アプリケーションのバックエンドを開発するには](https://eh-career.com/engineerhub/entry/2022/09/12/093000)
   - [ ] [Writing a container in Rust](https://litchipi.github.io/series/container_in_rust)
   - [ ] [Rust の良質な学習リソースをまとめる](https://www.bioerrorlog.work/entry/rust-good-learning-resources#Command-line-apps-in-Rust)
-
   - [ ] [Effective Rust](https://www.lurklurk.org/effective-rust/#effective-rust)
   - [ ] [Zero To Production In Rust](https://www.zero2prod.com/index.html?country=Japan&discount_code=VAT20)
-
   - [ ] [Zero To Production In Rust Sample](https://www.lpalmieri.com/posts/2020-05-24-zero-to-production-0-foreword/)
-
   - [ ] [Writing an OS in Rust](https://os.phil-opp.com/ja/)
   - [ ] [Rust design pattern](https://rust-unofficial.github.io/patterns/)
   - [ ] [Lets build a CLI in Rust](https://blog.ediri.io/lets-build-a-cli-in-rust)
@@ -191,9 +188,6 @@
   - [ ] [Design Patterns in TypeScript](https://refactoring.guru/ja)
 
 - React
-
-  - [ ] [How to build a movie search app using React Hooks](https://www.freecodecamp.org/news/how-to-build-a-movie-search-app-using-react-hooks-24eb72ddfaf7/)
-  - [ ] [React の流儀](https://ja.reactjs.org/docs/thinking-in-react.html)
   - [ ] [reactjs-interview-questions](https://github.com/sudheerj/reactjs-interview-questions)
   - [ ] [TypeScript: ReactNode 型と ReactElement 型と ReactChild 型](https://dackdive.hateblo.jp/entry/2019/08/07/090000)
   - [ ] [bulletproof-react](https://github.com/alan2207/bulletproof-react)
