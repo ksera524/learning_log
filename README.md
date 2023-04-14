@@ -20,7 +20,7 @@
 
 ## Frontend
 
-- [ ] [Web フロントエンド基礎演習](https://docs.google.com/presentation/d/e/2PACX-1vSjF1cp8fAdMKwFkLmtFT66e-UCD6zanO5KLsuRFmWyZ-8c06YQmgWT750Aqai2JfqHRARYWlkDLfaB/pub?slide=id.p)
+- [x] [Web フロントエンド基礎演習](https://docs.google.com/presentation/d/e/2PACX-1vSjF1cp8fAdMKwFkLmtFT66e-UCD6zanO5KLsuRFmWyZ-8c06YQmgWT750Aqai2JfqHRARYWlkDLfaB/pub?slide=id.p)
 - [ ] [Web フロントエンドパフォーマンス改善ハンドブック](https://dwango-js.github.io/performance-handbook/)
 - [ ] [Web フロントエンド再設計: レイヤードアーキテクチャの導入 ~ 高品質なコードを実現するために](https://zenn.dev/moneyforward/articles/e97dd1c0412071)
 
