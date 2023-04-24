@@ -1,17 +1,23 @@
-module.exports = {
-  stories: ["../src/components/**/*.stories.js"],
-  staticDirs: ["../public"],
+/** @type { import('@storybook/react-webpack5').StorybookConfig } */
+const config = {
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/preset-create-react-app",
     "@storybook/addon-interactions",
+    "@storybook/addon-mdx-gfm",
   ],
-  features: {
-    postcss: false,
+  framework: {
+    name: "@storybook/react-webpack5",
+    options: {},
   },
-  framework: "@storybook/react",
+  docs: {
+    autodocs: "tag",
+  },
   core: {
-    builder: "webpack4",
+    builder: "webpack5",
   },
+  staticDirs: ["..\\public"],
 };
+export default config;
