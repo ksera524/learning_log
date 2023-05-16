@@ -72,6 +72,7 @@ package-lock.json
 
 
 ## Rustdoc GUI tests
-src/test/rustdoc-gui/src/**.lock
+**/src/test/rustdoc-gui/src/**.lock
 
 # Before adding new lines, see the comment at the top.
+**/target/
