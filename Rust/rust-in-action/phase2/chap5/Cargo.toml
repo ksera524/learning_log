@@ -15,3 +15,6 @@ path = "src/q7.rs"
 [[bin]]
 name = "rand"
 path = "src/u8-to-rand.rs"
+[[bin]]
+name = "cpu"
+path = "src/cpu.rs"
