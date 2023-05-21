@@ -1,0 +1,17 @@
+[package]
+name = "chap5"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+[[bin]]
+name = "visualizing-f32"
+path = "src/visualizing-f32.rs"
+[[bin]]
+name = "q7"
+path = "src/q7.rs"
+[[bin]]
+name = "rand"
+path = "src/u8-to-rand.rs"
