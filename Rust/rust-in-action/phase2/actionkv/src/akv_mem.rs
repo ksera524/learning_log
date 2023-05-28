@@ -1,4 +1,4 @@
-use libactionlv::ActionKV;
+use libactionkv::ActionKV;
 
 #[cfg(target_os = "windows")]
 const USAGE : &str = "
@@ -30,7 +30,7 @@ fn main() {
     store.load().expect("unable to load file");
 
     match action {
-        "get" => match store.get(key).unwarp() {
+        "get" => match store.get(key).unwrap() {
             Some(value) => println!("{:?}", value),
             None => println!("Key not found"),
         },
