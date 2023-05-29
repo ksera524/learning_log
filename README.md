@@ -145,10 +145,8 @@
 
 - Rust
 
-  - [ ] [Rust を通して見るオブジェクト指向](https://techracho.bpsinc.jp/yoshi/2022_08_29/121213)
-  - [ ] [Rust で Web アプリケーションのバックエンドを開発するには](https://eh-career.com/engineerhub/entry/2022/09/12/093000)
+  - [x] [Rust を通して見るオブジェクト指向](https://techracho.bpsinc.jp/yoshi/2022_08_29/121213)
   - [ ] [Writing a container in Rust](https://litchipi.github.io/series/container_in_rust)
-  - [ ] [Rust の良質な学習リソースをまとめる](https://www.bioerrorlog.work/entry/rust-good-learning-resources#Command-line-apps-in-Rust)
   - [ ] [Effective Rust](https://www.lurklurk.org/effective-rust/#effective-rust)
   - [ ] [Zero To Production In Rust](https://www.zero2prod.com/index.html?country=Japan&discount_code=VAT20)
   - [ ] [Zero To Production In Rust Sample](https://www.lpalmieri.com/posts/2020-05-24-zero-to-production-0-foreword/)
@@ -163,7 +161,6 @@
   - [ ] [assertables-rust-crate](https://github.com/SixArm/assertables-rust-crate)
   - [ ] [Writing a Debugger From Scratch](https://www.timdbg.com/posts/writing-a-debugger-from-scratch-part-1/)
   - [ ] [Rust の手続きマクロで黒魔術入門](https://speakerdeck.com/lemolatoon/rustnoshou-sok-kimakurodehei-mo-shu-ru-men)
-  - [ ] [Rust の入門リソース](https://www.reddit.com/r/rust/comments/11pzzud/what_learning_resource_has_had_the_greatest/)
   - [ ] [Writing a Kubernetes Operator](https://metalbear.co/blog/writing-a-kubernetes-operator/)
   - [ ] [Rust の DI を考える](https://techblog.paild.co.jp/entry/2023/03/28/160241)
   - [ ] [軽量 Rust フレームワーク Tauri でデスクトップアプリ開発をはじめよう](https://gihyo.jp/article/2022/10/rust-monthly-topics-02)
@@ -213,6 +210,6 @@
 
 ## 面白そう
 
-- [ ] [独身男性 新築を買う](https://www.mzyy94.com/blog/2023/02/07/my-new-house/)
+- [x] [独身男性 新築を買う](https://www.mzyy94.com/blog/2023/02/07/my-new-house/)
 - [ ] [プロダクト開発はユーザーを絞って考える](https://product-managers-club.jp/blog/post/super-specific-who)
 - [ ] [Web サーバーアーキテクチャ進化論 2023](https://blog.ojisan.io/server-architecture-2023/)
