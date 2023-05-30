@@ -26,10 +26,10 @@ impl MacAddress {
 
     fn is_local(&self) -> bool {
         (self.0[0] & 0b_0000_0010) == 0b_0000_0010
-    }
+      }
 
     fn is_unicast(&self) -> bool {
-        (self.0[0] & 0b_0000_0001) == 0b_0000_0000
+        (self.0[0] & 0b_0000_0001) == 0b_0000_0001
     }
 }
 
@@ -38,4 +38,6 @@ fn main() {
     println!("MAC address: {}", mac);
     println!("Is unicast: {}", mac.is_unicast());
     println!("Is local: {}", mac.is_local());
+    assert!(mac.is_local());
+    assert!(mac.is_unicast());
 }
