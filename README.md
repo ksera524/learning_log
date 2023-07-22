@@ -1,4 +1,4 @@
-# 気が向いたときに読むリスト
+# 気が向いたときいつか読むリスト
 
 ## 基礎
 
@@ -139,6 +139,12 @@
 
 - [ ] [Prompt-Engineering-Guide](https://maximum80.github.io/Prompt-Engineering-Guide/)
 
+## CDN
+- [ ] [CDN 入門とエッジでのアプリケーション実行](https://future-architect.github.io/articles/20230427a/)
+
+## デザインシステム
+- [ ] [デザインシステム作成Tips 9つ](https://zenn.dev/stmn_inc/articles/fb0f03d239e5f4)
+
 ## プログラミング言語
 
 - [Priject based learning](https://github.com/practical-tutorials/project-based-learning)
@@ -164,7 +170,8 @@
   - [ ] [Writing a Kubernetes Operator](https://metalbear.co/blog/writing-a-kubernetes-operator/)
   - [ ] [Rust の DI を考える](https://techblog.paild.co.jp/entry/2023/03/28/160241)
   - [ ] [軽量 Rust フレームワーク Tauri でデスクトップアプリ開発をはじめよう](https://gihyo.jp/article/2022/10/rust-monthly-topics-02)
-
+  - [ ] [I have written a JVM in Rust](https://andreabergia.com/blog/2023/07/i-have-written-a-jvm-in-rust/)
+  - [ ] [Ideas for crafting CLI in Rust](https://dev.to/64bit/ideas-for-crafting-cli-in-rust-5b0d)
 - Go
 
   - [Go Books](https://github.com/dariubs/GoBooks)
@@ -189,6 +196,7 @@
   - [ ] [TypeScript: ReactNode 型と ReactElement 型と ReactChild 型](https://dackdive.hateblo.jp/entry/2019/08/07/090000)
   - [ ] [bulletproof-react](https://github.com/alan2207/bulletproof-react)
   - [x] [バックエンドエンジニアのための（かどうかは本当はよく分からないけど、とにかく書いてみる）React 入門](https://enakai00.hatenablog.com/entry/2023/03/09/133119)
+  - [ ] [Next.jsから学ぶWebレンダリング ~React誕生以前からApp Router with RSCまでの流れ~](https://zenn.dev/suzu_4/articles/2e6dbb25c12ee5)
 
 - Java
 
@@ -207,6 +215,9 @@
 - [詳解システムパフォーマンス](https://www.amazon.co.jp/s?k=%E8%A9%B3%E8%A7%A3%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9&adgrpid=61786953308&gclid=Cj0KCQiA1NebBhDDARIsAANiDD0VX9IXs_2xk4zS_IIraKar3fAqDDlOYzCtrJsHANGFJ9iPZQybiLgaAqPlEALw_wcB&hvadid=591887554539&hvdev=c&hvlocphy=1028853&hvnetw=g&hvqmt=e&hvrand=9554579947860432535&hvtargid=kwd-332157510422&hydadcr=27488_14541155&jp-ad-ap=0&tag=googhydr-22&ref=pd_sl_7glf0r7142_e)
 - [情熱プログラマー](https://www.amazon.co.jp/s?k=%E6%83%85%E7%86%B1%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%83%BC&crid=1QQN2LIGD63JF&sprefix=%E6%83%85%E7%86%B1%2Caps%2C188&ref=nb_sb_ss_ts-doa-p_4_2)
 - [新人エンジニアにおすすめする一冊 2022](https://developers.cyberagent.co.jp/blog/archives/34910/)
+
+## その他
+- [LeetCode厳選問題詳解](https://youoffer.ghost.io/leetcode/)
 
 ## 面白そう
 
