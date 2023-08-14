@@ -32,7 +32,6 @@ impl From<Q7> for f32 {
 }
 
 fn main(){}
-
 #[cfg(test)]
 mod tests {
     use super::*;
