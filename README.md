@@ -208,7 +208,7 @@
 ](https://rusty-ferris.pages.dev/blog/fp-actions-vs-calculations/)
   - [ ] [「Writing an OS in 1000 Lines」をRISC-V 64bit向けにRustで書いた](https://hanazonochateau.net/posts/2023/09/05/operating-system-in-1000-lines-rs/)
   - [ ] [How to Implement OAuth in Rust](https://www.shuttle.rs/blog/2023/08/30/using-oauth-with-axum)
-  - [ ] [Rustソースコードのざっくりとした歩き方](https://speakerdeck.com/tako8ki/rustsosukotonosatukuritositabu-kifang-3f597e58-222e-4c70-9b1b-e644eaa34895)
+  - [x] [Rustソースコードのざっくりとした歩き方](https://speakerdeck.com/tako8ki/rustsosukotonosatukuritositabu-kifang-3f597e58-222e-4c70-9b1b-e644eaa34895)
   - [ ] [Testing Rust with fake data generation](https://ferencfbin.medium.com/testing-rust-with-fake-data-generation-e541748668cf)
   - [ ] [I have written a JVM in Rust](https://andreabergia.com/blog/2023/07/i-have-written-a-jvm-in-rust/)
   - [ ] [On Maximizing Your Rust Code's Performance](https://jbecker.dev/research/on-writing-performant-rust)
