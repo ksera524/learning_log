@@ -4,6 +4,26 @@ use wasm_bindgen::JsCast;
 use web_sys::console;
 use std::rc::Rc;
 use std::sync::Mutex;
+use serde::Deserialize;
+use std::collections::HashMap;
+
+#[derive(Deserialize)]
+struct Sheet {
+    frames: HashMap<String, Cell>,
+}
+
+#[derive(Deserialize)]
+struct Rect {
+    x: u16,
+    y: u16,
+    w: u16,
+    h: u16,
+}
+
+#[derive(Deserialize)]
+struct Cell {
+    flame: Rect,
+}
 
 // This is like the `main` function, except for JavaScript.
 #[wasm_bindgen(start)]
@@ -60,7 +80,21 @@ pub fn main_js() -> Result<(), JsValue> {
         );
     });
 
+    let json = fetch_json("rhb.json")
+        .await
+        .expect("failed to fetch json");
+
+    let sheet: Sheet = json.into_serde().unwrap();
+
     Ok(())
+}
+
+async fn fetch_json(json_path:&str ) -> Result<JsValue, JsValue>{
+    let window = web_sys::window().unwrap();
+    let resp_value = wasm_bindgen_futures::JsFuture::from(window.fetch_with_str(json_path)).await?;
+    let resp = web_sys::Response = resp_value.dyn_into()?;
+
+    wasm_bindgen_futures::JsFuture::from(resp.json()?).await
 }
 
 fn sierpinski(
