@@ -139,6 +139,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "gloo-utils"
+version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "037fcb07216cb3a30f7292bd0176b050b7b9a052ba830ef7d5d65f6dc64ba58e"
+dependencies = [
+ "js-sys",
+ "serde",
+ "serde_json",
+ "wasm-bindgen",
+ "web-sys",
+]
+
+[[package]]
 name = "itoa"
 version = "1.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -256,6 +269,7 @@ dependencies = [
  "console_error_panic_hook",
  "futures",
  "getrandom",
+ "gloo-utils",
  "js-sys",
  "rand",
  "serde",
@@ -348,8 +362,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7706a72ab36d8cb1f80ffbf0e071533974a60d0a308d01a5d0375bf60499a342"
 dependencies = [
  "cfg-if 1.0.0",
- "serde",
- "serde_json",
  "wasm-bindgen-macro",
 ]
 
