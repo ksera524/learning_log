@@ -1,5 +1,7 @@
 use anyhow::{anyhow, Result};
-use wasm_bindgen::{JsCast, JsValue};
+use wasm_bindgen::{
+    closure::WasmClosure, closure::WasmClosureFnOnce, prelude::Closure, JsCast, JsValue,
+};
 use wasm_bindgen_futures::JsFuture;
 use web_sys::{CanvasRenderingContext2d, HtmlCanvasElement, Response, Window};
 
@@ -60,4 +62,15 @@ pub async fn fetch_json(json_path: &str) -> Result<JsValue> {
     )
     .await
     .map_err(|err| anyhow!("err casting to JsFuture: {:?}", err))
+}
+
+pub fn new_image() -> Result<web_sys::HtmlImageElement> {
+    web_sys::HtmlImageElement::new().map_err(|err| anyhow!("err creating image: {:?}", err))
+}
+
+pub fn closure_once<F, A, R>(fn_once: F) -> Closure<F::FnMut>
+where
+    F: 'static + WasmClosureFnOnce<A, R>,
+{
+    Closure::once(fn_once)
 }
