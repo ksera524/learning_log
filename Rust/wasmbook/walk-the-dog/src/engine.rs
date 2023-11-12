@@ -35,3 +35,4 @@ pub async fn load_image(source: &str) -> Result<HtmlImageElement> {
 
     Ok(image)
 }
+

@@ -5,6 +5,8 @@ use wasm_bindgen::{
 use wasm_bindgen_futures::JsFuture;
 use web_sys::{CanvasRenderingContext2d, HtmlCanvasElement, Response, Window};
 
+pub type LoopClosure = Closure<dyn FnMut(f64)>;
+
 macro_rules! log {
     ($($t:tt)*) => {
         web_sys::console::log_1(&format!($($t)*).into());
@@ -74,3 +76,18 @@ where
 {
     Closure::once(fn_once)
 }
+
+pub fn create_ref_clousure(f:impl FnMut(f64) + 'static) -> LoopClosure {
+    closure_wrap(Box::new(f))
+}
+
+pub fn closure_wrap<T: WasmClosure + ?Sized>(data: Box<T>) -> Closure<T> {
+    Closure::wrap(data)
+}
+
+pub fn request_animation_frame(callback:&LoopClosure) -> Result<i32> {
+    window()?
+        .request_animation_frame(callback.as_ref().unchecked_ref())
+        .map_err(|err| anyhow!("err requesting animation frame: {:?}", err))
+}
+
