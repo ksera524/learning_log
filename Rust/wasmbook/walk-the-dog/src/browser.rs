@@ -90,3 +90,10 @@ pub fn request_animation_frame(callback: &LoopClosure) -> Result<i32> {
         .request_animation_frame(callback.as_ref().unchecked_ref())
         .map_err(|err| anyhow!("err requesting animation frame: {:?}", err))
 }
+
+pub fn now() -> Result<f64> {
+    Ok(window()?
+        .performance()
+        .ok_or_else(|| anyhow!("Performance object is not found"))?
+        .now())
+}
