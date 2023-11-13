@@ -77,7 +77,7 @@ where
     Closure::once(fn_once)
 }
 
-pub fn create_ref_clousure(f:impl FnMut(f64) + 'static) -> LoopClosure {
+pub fn create_ref_clousure(f: impl FnMut(f64) + 'static) -> LoopClosure {
     closure_wrap(Box::new(f))
 }
 
@@ -85,9 +85,8 @@ pub fn closure_wrap<T: WasmClosure + ?Sized>(data: Box<T>) -> Closure<T> {
     Closure::wrap(data)
 }
 
-pub fn request_animation_frame(callback:&LoopClosure) -> Result<i32> {
+pub fn request_animation_frame(callback: &LoopClosure) -> Result<i32> {
     window()?
         .request_animation_frame(callback.as_ref().unchecked_ref())
         .map_err(|err| anyhow!("err requesting animation frame: {:?}", err))
 }
-
