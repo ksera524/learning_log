@@ -6,12 +6,15 @@ use std::sync::Mutex;
 use wasm_bindgen::prelude::Closure;
 use wasm_bindgen::{JsCast, JsValue};
 use web_sys::{CanvasRenderingContext2d, HtmlImageElement};
+use async_trait::async_trait;
 
 use crate::browser::{self, LoopClosure};
 
 const FRAME_SIZE:f32 = 1.0/60.0 * 1000.0;// 60 fps
 
+#[async_trait(?Send)]
 pub trait Game {
+    async fn initialize(&self) -> Result<Box<dyn Game>>;
     fn update(&mut self);
     fn draw(&self, context: &CanvasRenderingContext2d);
 }
@@ -25,6 +28,7 @@ type SharedLoopClosure = Rc<RefCell<Option<LoopClosure>>>;
 
 impl GameLoop {
     pub async fn start(mut game: impl Game + 'static) -> Result<()> {
+        let mut game = game.initialize().await?;
         let mut game_loop = GameLoop {
             last_frame: browser::now()?,
             accumulated_delta: 0.0,

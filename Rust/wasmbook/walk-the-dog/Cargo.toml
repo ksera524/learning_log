@@ -27,6 +27,7 @@ wasm-bindgen = {version = "0.2.78"}
 console_error_panic_hook = "0.1.7"
 rand = "0.8.4"
 getrandom = { version = "0.2.3", features = ["js"]}
+async-trait = "0.1.52"
 # `wee_alloc` is a tiny allocator for wasm that is only ~1K in code size
 # compared to the default allocator's ~10K. However, it is slower than the default
 # allocator, so it's not enabled by default.
