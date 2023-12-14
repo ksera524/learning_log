@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use crate::{engine::{Game,Renderer, self, Rect}, browser};
+use crate::{engine::{Game,Renderer, self, Rect, KeyState}, browser};
 use anyhow::Result;
 use async_trait::async_trait;
 use gloo_utils::format::JsValueSerdeExt;
@@ -55,7 +55,7 @@ impl Game for WalkTheDog {
         }))
     }
 
-    fn update(&mut self) {
+    fn update(&mut self,keystate:&KeyState) {
         if self.frame < 23 {
             self.frame += 1;
         } else {
