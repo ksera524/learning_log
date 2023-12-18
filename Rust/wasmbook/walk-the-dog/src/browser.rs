@@ -40,11 +40,8 @@ pub fn context() -> Result<CanvasRenderingContext2d> {
         .map_err(|context| anyhow!("Error casting to CanvasRenderingContext2d: {:?}", context))
 }
 
-pub fn spawn_local<F>(future: F)
-where
-    F: futures::Future<Output = ()> + 'static,
-{
-    wasm_bindgen_futures::spawn_local(future);
+pub fn new_image() -> Result<web_sys::HtmlImageElement> {
+    web_sys::HtmlImageElement::new().map_err(|err| anyhow!("err creating image: {:?}", err))
 }
 
 pub async fn fetch_with_str(resource: &str) -> Result<JsValue> {
@@ -66,8 +63,11 @@ pub async fn fetch_json(json_path: &str) -> Result<JsValue> {
     .map_err(|err| anyhow!("err casting to JsFuture: {:?}", err))
 }
 
-pub fn new_image() -> Result<web_sys::HtmlImageElement> {
-    web_sys::HtmlImageElement::new().map_err(|err| anyhow!("err creating image: {:?}", err))
+pub fn spawn_local<F>(future: F)
+where
+    F: futures::Future<Output = ()> + 'static,
+{
+    wasm_bindgen_futures::spawn_local(future);
 }
 
 pub fn closure_once<F, A, R>(fn_once: F) -> Closure<F::FnMut>

@@ -1,6 +1,9 @@
 use std::collections::HashMap;
 
-use crate::{engine::{Game,Renderer, self, Rect, KeyState}, browser};
+use crate::{
+    browser,
+    engine::{self, Game, KeyState, Rect, Renderer},
+};
 use anyhow::Result;
 use async_trait::async_trait;
 use gloo_utils::format::JsValueSerdeExt;
@@ -16,7 +19,7 @@ struct SheetRect {
 }
 
 #[derive(Deserialize)]
-struct Cell  {
+struct Cell {
     frame: SheetRect,
 }
 
@@ -55,7 +58,7 @@ impl Game for WalkTheDog {
         }))
     }
 
-    fn update(&mut self,keystate:&KeyState) {
+    fn update(&mut self, keystate: &KeyState) {
         if self.frame < 23 {
             self.frame += 1;
         } else {
@@ -64,9 +67,13 @@ impl Game for WalkTheDog {
     }
 
     fn draw(&self, renderer: &Renderer) {
-        let current_sprite = (self.frame / 3 ) + 1;
+        let current_sprite = (self.frame / 3) + 1;
         let frame_name = format!("Run ({}).png", current_sprite);
-        let sprite = self.sheet.as_ref().and_then(|sheet| sheet.frames.get(&frame_name)).expect("no frame found");
+        let sprite = self
+            .sheet
+            .as_ref()
+            .and_then(|sheet| sheet.frames.get(&frame_name))
+            .expect("no frame found");
 
         renderer.clear(&Rect {
             x: 0.0,
@@ -76,21 +83,21 @@ impl Game for WalkTheDog {
         });
 
         self.image.as_ref().map(|image| {
-        renderer.draw_iamge(
-            &image,
-            &Rect {
-                x: sprite.frame.x.into(),
-                y: sprite.frame.y.into(),
-                width: sprite.frame.w.into(),
-                height: sprite.frame.h.into(),
-            },
-            &Rect {
-                x: 300.0,
-                y: 300.0,
-                width: sprite.frame.w.into(),
-                height: sprite.frame.h.into(),
-            }
-        );
-    });
+            renderer.draw_iamge(
+                &image,
+                &Rect {
+                    x: sprite.frame.x.into(),
+                    y: sprite.frame.y.into(),
+                    width: sprite.frame.w.into(),
+                    height: sprite.frame.h.into(),
+                },
+                &Rect {
+                    x: 300.0,
+                    y: 300.0,
+                    width: sprite.frame.w.into(),
+                    height: sprite.frame.h.into(),
+                },
+            );
+        });
     }
 }

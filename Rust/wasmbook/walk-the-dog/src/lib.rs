@@ -13,7 +13,6 @@ use std::sync::Mutex;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
 
-
 #[derive(Deserialize)]
 struct Sheet {
     frames: HashMap<String, Cell>,
