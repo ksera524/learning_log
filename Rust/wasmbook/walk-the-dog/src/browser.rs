@@ -44,6 +44,19 @@ pub fn new_image() -> Result<web_sys::HtmlImageElement> {
     web_sys::HtmlImageElement::new().map_err(|err| anyhow!("err creating image: {:?}", err))
 }
 
+pub fn request_animation_frame(callback: &LoopClosure) -> Result<i32> {
+    window()?
+        .request_animation_frame(callback.as_ref().unchecked_ref())
+        .map_err(|err| anyhow!("err requesting animation frame: {:?}", err))
+}
+
+pub fn now() -> Result<f64> {
+    Ok(window()?
+        .performance()
+        .ok_or_else(|| anyhow!("Performance object is not found"))?
+        .now())
+}
+
 pub async fn fetch_with_str(resource: &str) -> Result<JsValue> {
     JsFuture::from(window()?.fetch_with_str(resource))
         .await
@@ -83,17 +96,4 @@ pub fn create_ref_clousure(f: impl FnMut(f64) + 'static) -> LoopClosure {
 
 pub fn closure_wrap<T: WasmClosure + ?Sized>(data: Box<T>) -> Closure<T> {
     Closure::wrap(data)
-}
-
-pub fn request_animation_frame(callback: &LoopClosure) -> Result<i32> {
-    window()?
-        .request_animation_frame(callback.as_ref().unchecked_ref())
-        .map_err(|err| anyhow!("err requesting animation frame: {:?}", err))
-}
-
-pub fn now() -> Result<f64> {
-    Ok(window()?
-        .performance()
-        .ok_or_else(|| anyhow!("Performance object is not found"))?
-        .now())
 }
