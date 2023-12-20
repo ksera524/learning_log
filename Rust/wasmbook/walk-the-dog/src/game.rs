@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use crate::{
     browser,
-    engine::{self, Game, KeyState, Rect, Renderer},
+    engine::{self, Game, KeyState, Rect, Renderer, Point},
 };
 use anyhow::Result;
 use async_trait::async_trait;
@@ -28,10 +28,13 @@ pub struct Sheet {
     frames: HashMap<String, Cell>,
 }
 
+
+
 pub struct WalkTheDog {
     sheet: Option<Sheet>,
     image: Option<HtmlImageElement>,
     frame: u8,
+    position: Point,
 }
 
 impl WalkTheDog {
@@ -40,6 +43,7 @@ impl WalkTheDog {
             sheet: None,
             image: None,
             frame: 0,
+            position: Point { x: 0, y: 0 },
         }
     }
 }
@@ -55,10 +59,32 @@ impl Game for WalkTheDog {
             sheet: Some(sheet),
             image: Some(image),
             frame: self.frame,
+            position: self.position,
         }))
     }
 
     fn update(&mut self, keystate: &KeyState) {
+        let mut velocity = Point { x: 0, y: 0 };
+        if keystate.is_pressed("ArrowDown") {
+            velocity.y += 3;
+        }
+
+        if keystate.is_pressed("ArrowUp") {
+            velocity.y -= 3;
+        }
+
+        if keystate.is_pressed("ArrowLeft") {
+            velocity.x -= 3;
+        }
+
+        if keystate.is_pressed("ArrowRight") {
+            velocity.x += 3;
+        }
+
+        self.position.x += velocity.x;
+        self.position.y += velocity.y;
+
+
         if self.frame < 23 {
             self.frame += 1;
         } else {
@@ -92,8 +118,8 @@ impl Game for WalkTheDog {
                     height: sprite.frame.h.into(),
                 },
                 &Rect {
-                    x: 300.0,
-                    y: 300.0,
+                    x: self.position.x.into(),
+                    y: self.position.y.into(),
                     width: sprite.frame.w.into(),
                     height: sprite.frame.h.into(),
                 },
