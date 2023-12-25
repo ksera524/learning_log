@@ -10,6 +10,8 @@ use gloo_utils::format::JsValueSerdeExt;
 use serde::Deserialize;
 use web_sys::HtmlImageElement;
 
+use self::red_hat_boy_states::*;
+
 #[derive(Deserialize)]
 struct SheetRect {
     x: i16,
@@ -28,7 +30,42 @@ pub struct Sheet {
     frames: HashMap<String, Cell>,
 }
 
+struct RedHatBoy {
+    state_machine: RedHatBoyStateMachine,
+    sprite_sheet:Sheet,
+    image: HtmlImageElement,
+}
 
+#[derive(Copy, Clone)]
+enum RedHatBoyStateMachine {
+    Idle(RedHatBoyState<Idle>),
+    Running(RedHatBoyState<Running>),
+}
+
+mod red_hat_boy_states {
+    use serde::de;
+
+    use crate::engine::Point;
+
+    #[derive(Copy, Clone)]
+    pub struct RedHatBoyState<S>{
+        context: RedHatBoyContext,
+        _state: S,
+    }
+
+    #[derive(Copy, Clone)]
+    pub struct RedHatBoyContext {
+        frame: u8,
+        position: Point,
+        velocity: Point,
+    }
+
+    #[derive(Copy, Clone)]
+    pub struct Idle;
+
+    #[derive(Copy, Clone)]
+    pub struct Running;
+}
 
 pub struct WalkTheDog {
     sheet: Option<Sheet>,
