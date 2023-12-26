@@ -94,7 +94,7 @@ impl Renderer {
         );
     }
 
-    pub fn draw_iamge(&self, image: &HtmlImageElement, frame: &Rect, destination: &Rect) {
+    pub fn draw_image(&self, image: &HtmlImageElement, frame: &Rect, destination: &Rect) {
         self.context
             .draw_image_with_html_image_element_and_sw_and_sh_and_dx_and_dy_and_dw_and_dh(
                 &image,

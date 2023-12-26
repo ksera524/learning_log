@@ -170,7 +170,7 @@ impl Game for WalkTheDog {
         });
 
         self.image.as_ref().map(|image| {
-            renderer.draw_iamge(
+            renderer.draw_image(
                 &image,
                 &Rect {
                     x: sprite.frame.x.into(),
