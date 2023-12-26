@@ -58,7 +58,6 @@ impl GameLoop {
         let f: SharedLoopClosure = Rc::new(RefCell::new(None));
         let g = f.clone();
 
-
         *g.borrow_mut() = Some(browser::create_ref_clousure(move |perf: f64| {
             process_input(&mut keystate, &mut keyevent_receiver);
             game_loop.accumulated_delta += (perf - game_loop.last_frame) as f32;
@@ -209,6 +208,6 @@ fn process_input(state: &mut KeyState, keyevent_receiver: &mut UnboundedReceiver
 
 #[derive(Clone, Copy)]
 pub struct Point {
-    pub x:i16,
-    pub y:i16,
+    pub x: i16,
+    pub y: i16,
 }

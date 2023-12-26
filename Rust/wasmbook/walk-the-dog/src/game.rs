@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use crate::{
     browser,
-    engine::{self, Game, KeyState, Rect, Renderer, Point},
+    engine::{self, Game, KeyState, Point, Rect, Renderer},
 };
 use anyhow::Result;
 use async_trait::async_trait;
@@ -32,7 +32,7 @@ pub struct Sheet {
 
 struct RedHatBoy {
     state_machine: RedHatBoyStateMachine,
-    sprite_sheet:Sheet,
+    sprite_sheet: Sheet,
     image: HtmlImageElement,
 }
 
@@ -42,13 +42,30 @@ enum RedHatBoyStateMachine {
     Running(RedHatBoyState<Running>),
 }
 
-mod red_hat_boy_states {
-    use serde::de;
+pub enum Event {
+    Run,
+}
 
+impl RedHatBoyStateMachine {
+    fn transition(self, event: Event) -> Self {
+        match (self, event) {
+            (RedHatBoyStateMachine::Idle(state), Event::Run) => state.run().into(),
+            _ => self,
+        }
+    }
+}
+
+impl From<RedHatBoyState<Running>> for RedHatBoyStateMachine {
+    fn from(state: RedHatBoyState<Running>) -> Self {
+        RedHatBoyStateMachine::Running(state)
+    }
+}
+
+mod red_hat_boy_states {
     use crate::engine::Point;
 
     #[derive(Copy, Clone)]
-    pub struct RedHatBoyState<S>{
+    pub struct RedHatBoyState<S> {
         context: RedHatBoyContext,
         _state: S,
     }
@@ -63,6 +80,14 @@ mod red_hat_boy_states {
     #[derive(Copy, Clone)]
     pub struct Idle;
 
+    impl RedHatBoyState<Idle> {
+        pub fn run(self) -> RedHatBoyState<Running> {
+            RedHatBoyState {
+                context: self.context,
+                _state: Running {},
+            }
+        }
+    }
     #[derive(Copy, Clone)]
     pub struct Running;
 }
@@ -120,7 +145,6 @@ impl Game for WalkTheDog {
 
         self.position.x += velocity.x;
         self.position.y += velocity.y;
-
 
         if self.frame < 23 {
             self.frame += 1;
