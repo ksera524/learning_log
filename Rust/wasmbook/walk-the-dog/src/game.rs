@@ -12,7 +12,7 @@ use web_sys::HtmlImageElement;
 
 use self::red_hat_boy_states::*;
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Clone)]
 struct SheetRect {
     x: i16,
     y: i16,
@@ -20,12 +20,12 @@ struct SheetRect {
     h: i16,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize,Clone)]
 struct Cell {
     frame: SheetRect,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Clone)]
 pub struct Sheet {
     frames: HashMap<String, Cell>,
 }
@@ -34,6 +34,16 @@ struct RedHatBoy {
     state_machine: RedHatBoyStateMachine,
     sprite_sheet: Sheet,
     image: HtmlImageElement,
+}
+
+impl RedHatBoy {
+    fn new(sprite_sheet: Sheet, image: HtmlImageElement) -> Self {
+        RedHatBoy {
+            state_machine: RedHatBoyStateMachine::Idle(RedHatBoyState::new()),
+            sprite_sheet,
+            image,
+        }
+    }
 }
 
 #[derive(Copy, Clone)]
@@ -61,42 +71,12 @@ impl From<RedHatBoyState<Running>> for RedHatBoyStateMachine {
     }
 }
 
-mod red_hat_boy_states {
-    use crate::engine::Point;
-
-    #[derive(Copy, Clone)]
-    pub struct RedHatBoyState<S> {
-        context: RedHatBoyContext,
-        _state: S,
-    }
-
-    #[derive(Copy, Clone)]
-    pub struct RedHatBoyContext {
-        frame: u8,
-        position: Point,
-        velocity: Point,
-    }
-
-    #[derive(Copy, Clone)]
-    pub struct Idle;
-
-    impl RedHatBoyState<Idle> {
-        pub fn run(self) -> RedHatBoyState<Running> {
-            RedHatBoyState {
-                context: self.context,
-                _state: Running {},
-            }
-        }
-    }
-    #[derive(Copy, Clone)]
-    pub struct Running;
-}
-
 pub struct WalkTheDog {
     sheet: Option<Sheet>,
     image: Option<HtmlImageElement>,
     frame: u8,
     position: Point,
+    rhb: Option<RedHatBoy>
 }
 
 impl WalkTheDog {
@@ -106,6 +86,7 @@ impl WalkTheDog {
             image: None,
             frame: 0,
             position: Point { x: 0, y: 0 },
+            rhb: None
         }
     }
 }
@@ -113,15 +94,18 @@ impl WalkTheDog {
 #[async_trait(?Send)]
 impl Game for WalkTheDog {
     async fn initialize(&self) -> Result<Box<dyn Game>> {
-        let sheet: Sheet = browser::fetch_json("rhb.json").await?.into_serde()?;
-
-        let image = engine::load_image("rhb.png").await?;
+        let sheet: Option<Sheet> = browser::fetch_json("rhb.json").await?.into_serde()?;
+        let image = Some(engine::load_image("rhb.png").await?);
 
         Ok(Box::new(WalkTheDog {
-            sheet: Some(sheet),
-            image: Some(image),
+            sheet: sheet.clone(),
+            image: image.clone(),
             frame: self.frame,
             position: self.position,
+            rhb: Some(RedHatBoy::new(
+                sheet.clone().ok_or_else(|| anyhow::anyhow!("no sheet"))?,
+                image.clone().ok_or_else(|| anyhow::anyhow!("no image"))?,
+            ))
         }))
     }
 
@@ -187,4 +171,47 @@ impl Game for WalkTheDog {
             );
         });
     }
+}
+
+mod red_hat_boy_states {
+    use crate::engine::Point;
+    const FLOOR: i16 = 475;
+
+    #[derive(Copy, Clone)]
+    pub struct RedHatBoyState<S> {
+        context: RedHatBoyContext,
+        _state: S,
+    }
+
+    #[derive(Copy, Clone)]
+    pub struct RedHatBoyContext {
+        frame: u8,
+        position: Point,
+        velocity: Point,
+    }
+
+    #[derive(Copy, Clone)]
+    pub struct Idle;
+
+    impl RedHatBoyState<Idle> {
+        pub fn new() -> Self {
+            RedHatBoyState {
+                context: RedHatBoyContext {
+                    frame: 0,
+                    position: Point { x: 0, y: FLOOR },
+                    velocity: Point { x: 0, y: 0 },
+                },
+                _state: Idle {},
+            }
+        }
+
+        pub fn run(self) -> RedHatBoyState<Running> {
+            RedHatBoyState {
+                context: self.context,
+                _state: Running {},
+            }
+        }
+    }
+    #[derive(Copy, Clone)]
+    pub struct Running;
 }
