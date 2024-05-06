@@ -1,1 +1,0 @@
-C:\Users\ksera\Desktop\git\learning_log\Rust\The\ Book\minigrep\target\debug\minigrep.exe: C:\Users\ksera\Desktop\git\learning_log\Rust\The\ Book\minigrep\src\lib.rs C:\Users\ksera\Desktop\git\learning_log\Rust\The\ Book\minigrep\src\main.rs
