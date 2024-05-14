@@ -6,7 +6,6 @@ use crate::{
 };
 use anyhow::Result;
 use async_trait::async_trait;
-use futures::io::Seek;
 use gloo_utils::format::JsValueSerdeExt;
 use serde::Deserialize;
 use web_sys::HtmlImageElement;
@@ -77,6 +76,10 @@ impl RedHatBoy {
     fn update(&mut self) {
         self.state_machine = self.state_machine.update();
     }
+
+    fn run_right(&mut self) {
+        self.state_machine = self.state_machine.transition(Event::Run);
+    }
 }
 
 #[derive(Copy, Clone)]
@@ -115,16 +118,13 @@ impl RedHatBoyStateMachine {
     fn update(self) -> Self {
         match self {
             RedHatBoyStateMachine::Idle(mut state) => {
-                if state.context
-                
-                .frame < 29 {
-                    state.context.frame += 1;
-                } else {
-                    state.context.frame = 0;
-            }
-            RedHatBoyStateMachine::Idle(state)
+                state.update();
+                RedHatBoyStateMachine::Idle(state)
         }
-        RedHatBoyStateMachine::Running(_) => self,
+            RedHatBoyStateMachine::Running(mut state) => {
+                state.update();
+                RedHatBoyStateMachine::Running(state)
+        },
         }
     }
 }
@@ -136,20 +136,12 @@ impl From<RedHatBoyState<Running>> for RedHatBoyStateMachine {
 }
 
 pub struct WalkTheDog {
-    sheet: Option<Sheet>,
-    image: Option<HtmlImageElement>,
-    frame: u8,
-    position: Point,
     rhb: Option<RedHatBoy>
 }
 
 impl WalkTheDog {
     pub fn new() -> Self {
         Self {
-            sheet: None,
-            image: None,
-            frame: 0,
-            position: Point { x: 0, y: 0 },
             rhb: None
         }
     }
@@ -165,10 +157,6 @@ impl Game for WalkTheDog {
         let image = Some(engine::load_image("rhb.png").await?);
 
         Ok(Box::new(WalkTheDog {
-            sheet: sheet.clone(),
-            image: image.clone(),
-            frame: self.frame,
-            position: self.position,
             rhb: Some(RedHatBoy::new(
                 sheet.clone().ok_or_else(|| anyhow::anyhow!("no sheet"))?,
                 image.clone().ok_or_else(|| anyhow::anyhow!("no image"))?,
@@ -192,29 +180,13 @@ impl Game for WalkTheDog {
 
         if keystate.is_pressed("ArrowRight") {
             velocity.x += 3;
-        }
-
-        self.position.x += velocity.x;
-        self.position.y += velocity.y;
-
-        if self.frame < 23 {
-            self.frame += 1;
-        } else {
-            self.frame = 0;
+            self.rhb.as_mut().unwrap().run_right();
         }
 
         self.rhb.as_mut().unwrap().update();
     }
 
     fn draw(&self, renderer: &Renderer) {
-        let current_sprite = (self.frame / 3) + 1;
-        let frame_name = format!("Run ({}).png", current_sprite);
-        let sprite = self
-            .sheet
-            .as_ref()
-            .and_then(|sheet| sheet.frames.get(&frame_name))
-            .expect("no frame found");
-
         renderer.clear(&Rect {
             x: 0.0,
             y: 0.0,
@@ -222,23 +194,6 @@ impl Game for WalkTheDog {
             height: 600.0,
         });
 
-        self.image.as_ref().map(|image| {
-            renderer.draw_image(
-                &image,
-                &Rect {//spritシートから取り出す位置
-                    x: sprite.frame.x.into(),
-                    y: sprite.frame.y.into(),
-                    width: sprite.frame.w.into(),
-                    height: sprite.frame.h.into(),
-                },
-                &Rect {//実際にcanvasに配置する位置
-                    x: self.position.x.into(),
-                    y: self.position.y.into(),
-                    width: sprite.frame.w.into(),
-                    height: sprite.frame.h.into(),
-                },
-            );
-        });
         self.rhb.as_ref().unwrap().draw(renderer);
     }
 }
@@ -246,12 +201,15 @@ impl Game for WalkTheDog {
 mod red_hat_boy_states {
     use crate::engine::Point;
     const FLOOR: i16 = 475;
+    const RUNNING_SPEED: i16 = 3;
     const IDLE_FRAME_NAME:&str = "Idle";
+    const IDLE_FRAMES:u8 = 29;
     const RUN_FRAME_NAME:&str = "Run";
+    const RUN_FRAMES:u8 = 23;
 
     #[derive(Copy, Clone)]
     pub struct RedHatBoyState<S> {
-        pub context: RedHatBoyContext,
+        context: RedHatBoyContext,
         _state: S,
     }
 
@@ -260,6 +218,31 @@ mod red_hat_boy_states {
         pub frame: u8,
         pub position: Point,
         pub velocity: Point,
+    }
+
+    impl RedHatBoyContext {
+        pub fn update(mut self,frame_count:u8) -> Self {
+            if self.frame < frame_count {
+                self.frame += 1;
+            } else {
+                self.frame = 0;
+            }
+
+            self.position.x += self.velocity.x;
+            self.position.y += self.velocity.y;
+
+            self
+        }
+
+        fn reset_frame(mut self) -> Self {
+            self.frame = 0;
+            self
+        }
+
+        fn run_right(mut self) -> Self {
+            self.velocity.x += RUNNING_SPEED;
+            self
+        } 
     }
 
     #[derive(Copy, Clone)]
@@ -285,7 +268,7 @@ mod red_hat_boy_states {
 
         pub fn run(self) -> RedHatBoyState<Running> {
             RedHatBoyState {
-                context: self.context,
+                context: self.context.reset_frame().run_right(),
                 _state: Running {},
             }
         }
@@ -293,13 +276,21 @@ mod red_hat_boy_states {
         pub fn frame_name(&self) -> &str {
             IDLE_FRAME_NAME
         }
+
+        pub fn update(&mut self) {
+            self.context = self.context.update(IDLE_FRAMES);
+        }
     }
+
     #[derive(Copy, Clone)]
     pub struct Running;
 
     impl RedHatBoyState<Running> {
         pub fn frame_name(&self) -> &str {
             RUN_FRAME_NAME
+        }
+        pub fn update(&mut self) {
+            self.context = self.context.update(RUN_FRAMES);
         }
     }
 }
