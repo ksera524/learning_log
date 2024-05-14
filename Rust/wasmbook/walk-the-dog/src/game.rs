@@ -4,7 +4,7 @@ use crate::{
     browser,
     engine::{self, Game, KeyState, Point, Rect, Renderer},
 };
-use anyhow::Result;
+use anyhow::{anyhow, Result};
 use async_trait::async_trait;
 use gloo_utils::format::JsValueSerdeExt;
 use serde::Deserialize;
@@ -159,14 +159,15 @@ impl From<SlidingEndUpdate> for RedHatBoyStateMachine {
     }
 }
 
-pub struct WalkTheDog {
-    rhb: Option<RedHatBoy>
+pub enum WalkTheDog {
+    Loading,
+    Loaded(RedHatBoy),
 }
 
 impl WalkTheDog {
     pub fn new() -> Self {
         Self {
-            rhb: None
+            WalkTheDog::Loading
         }
     }
 }
@@ -174,51 +175,38 @@ impl WalkTheDog {
 #[async_trait(?Send)]
 impl Game for WalkTheDog {
     async fn initialize(&self) -> Result<Box<dyn Game>> {
-        let sheet: Option<Sheet> = browser::fetch_json("rhb.json")
-            .await?
-            .into_serde()?;
+        match self {
+            WalkTheDog::Loading => {
+                let json = browser::fetch_json("rhb.json").await?;
 
-        let image = Some(engine::load_image("rhb.png").await?);
+                let rhb = RedHatBoy::new(
+                    json.into_serde::<Sheet>()?,
+                    engine::load_image("rhb.png").await?,
+                );
 
-        Ok(Box::new(WalkTheDog {
-            rhb: Some(RedHatBoy::new(
-                sheet.clone().ok_or_else(|| anyhow::anyhow!("no sheet"))?,
-                image.clone().ok_or_else(|| anyhow::anyhow!("no image"))?,
-            ))
-        }))
+                Ok(Box::new(WalkTheDog::Loaded(rhb)))
+            },
+            WalkTheDog::Loaded(_) => Err(anyhow!("Game already initialized")),
+        }
     }
 
     fn update(&mut self, keystate: &KeyState) {
-        let mut velocity = Point { x: 0, y: 0 };
-        if keystate.is_pressed("ArrowDown") {
-            self.rhb.as_mut().unwrap().slide();
-        }
+        if let WalkTheDog::Loaded(rhb) = self {
+            if keystate.is_pressed("ArrowRight") {
+                rhb.run_right();
+            } 
+            if keystate.is_pressed("ArrowDown") {
+                rhb.slide();
+            } 
 
-        if keystate.is_pressed("ArrowUp") {
-            velocity.y -= 3;
+            rhb.update();
         }
-
-        if keystate.is_pressed("ArrowLeft") {
-            velocity.x -= 3;
-        }
-
-        if keystate.is_pressed("ArrowRight") {
-            velocity.x += 3;
-            self.rhb.as_mut().unwrap().run_right();
-        }
-
-        self.rhb.as_mut().unwrap().update();
     }
 
     fn draw(&self, renderer: &Renderer) {
-        renderer.clear(&Rect {
-            x: 0.0,
-            y: 0.0,
-            width: 600.0,
-            height: 600.0,
-        });
-
-        self.rhb.as_ref().unwrap().draw(renderer);
+        if let WalkTheDog::Loaded(rhb) = self {
+            rhb.draw(renderer);
+        }
     }
 }
 
