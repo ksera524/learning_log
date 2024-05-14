@@ -166,9 +166,7 @@ pub enum WalkTheDog {
 
 impl WalkTheDog {
     pub fn new() -> Self {
-        Self {
-            WalkTheDog::Loading
-        }
+        WalkTheDog::Loading
     }
 }
 
