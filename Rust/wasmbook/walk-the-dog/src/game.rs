@@ -202,6 +202,13 @@ impl Game for WalkTheDog {
     }
 
     fn draw(&self, renderer: &Renderer) {
+        renderer.clear(&Rect {
+            x: 0.0,
+            y: 0.0,
+            width: 600.0,
+            height: 600.0,
+        });
+
         if let WalkTheDog::Loaded(rhb) = self {
             rhb.draw(renderer);
         }
