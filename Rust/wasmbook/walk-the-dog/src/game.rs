@@ -158,7 +158,10 @@ impl WalkTheDog {
 #[async_trait(?Send)]
 impl Game for WalkTheDog {
     async fn initialize(&self) -> Result<Box<dyn Game>> {
-        let sheet: Option<Sheet> = browser::fetch_json("rhb.json").await?.into_serde()?;
+        let sheet: Option<Sheet> = browser::fetch_json("rhb.json")
+            .await?
+            .into_serde()?;
+
         let image = Some(engine::load_image("rhb.png").await?);
 
         Ok(Box::new(WalkTheDog {
@@ -222,13 +225,13 @@ impl Game for WalkTheDog {
         self.image.as_ref().map(|image| {
             renderer.draw_image(
                 &image,
-                &Rect {
+                &Rect {//spritシートから取り出す位置
                     x: sprite.frame.x.into(),
                     y: sprite.frame.y.into(),
                     width: sprite.frame.w.into(),
                     height: sprite.frame.h.into(),
                 },
-                &Rect {
+                &Rect {//実際にcanvasに配置する位置
                     x: self.position.x.into(),
                     y: self.position.y.into(),
                     width: sprite.frame.w.into(),

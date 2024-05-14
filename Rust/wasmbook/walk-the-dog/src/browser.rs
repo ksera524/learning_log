@@ -3,13 +3,13 @@ use wasm_bindgen::{
     closure::WasmClosure, closure::WasmClosureFnOnce, prelude::Closure, JsCast, JsValue,
 };
 use wasm_bindgen_futures::JsFuture;
-use web_sys::{CanvasRenderingContext2d, HtmlCanvasElement, Response, Window};
+use web_sys::{CanvasRenderingContext2d, Document, HtmlCanvasElement, HtmlImageElement, Response, Window};
 
 pub type LoopClosure = Closure<dyn FnMut(f64)>;
 
 macro_rules! log {
     ($($t:tt)*) => {
-        web_sys::console::log_1(&format!($($t)*).into());
+        console::log_1(&format!($($t)*).into());
     };
 }
 
@@ -17,7 +17,7 @@ pub fn window() -> Result<Window> {
     web_sys::window().ok_or_else(|| anyhow!("no window found"))
 }
 
-pub fn document() -> Result<web_sys::Document> {
+pub fn document() -> Result<Document> {
     window()?
         .document()
         .ok_or_else(|| anyhow!("no document found"))
@@ -27,7 +27,7 @@ pub fn canvas() -> Result<HtmlCanvasElement> {
     document()?
         .get_element_by_id("canvas")
         .ok_or_else(|| anyhow!("no canvas found"))?
-        .dyn_into::<web_sys::HtmlCanvasElement>()
+        .dyn_into::<HtmlCanvasElement>()
         .map_err(|element| anyhow!("Error casting to HtmlCanvasElement: {:?}", element))
 }
 
@@ -36,12 +36,12 @@ pub fn context() -> Result<CanvasRenderingContext2d> {
         .get_context("2d")
         .map_err(|js_value| anyhow!("Error getting context: {:?}", js_value))?
         .ok_or_else(|| anyhow!("no context found"))?
-        .dyn_into::<web_sys::CanvasRenderingContext2d>()
+        .dyn_into::<CanvasRenderingContext2d>()
         .map_err(|context| anyhow!("Error casting to CanvasRenderingContext2d: {:?}", context))
 }
 
-pub fn new_image() -> Result<web_sys::HtmlImageElement> {
-    web_sys::HtmlImageElement::new().map_err(|err| anyhow!("err creating image: {:?}", err))
+pub fn new_image() -> Result<HtmlImageElement> {
+    HtmlImageElement::new().map_err(|err| anyhow!("err creating image: {:?}", err))
 }
 
 pub fn request_animation_frame(callback: &LoopClosure) -> Result<i32> {
@@ -68,12 +68,12 @@ pub async fn fetch_json(json_path: &str) -> Result<JsValue> {
     let resp: Response = resp_value
         .dyn_into()
         .map_err(|err| anyhow!("err casting to Response: {:?}", err))?;
+
     JsFuture::from(
         resp.json()
-            .map_err(|err| anyhow!("err casting to JsFuture: {:?}", err))?,
-    )
-    .await
-    .map_err(|err| anyhow!("err casting to JsFuture: {:?}", err))
+            .map_err(|err| anyhow!("err casting to JsFuture: {:?}", err))?,)
+            .await
+            .map_err(|err| anyhow!("err casting to JsFuture: {:?}", err))
 }
 
 pub fn spawn_local<F>(future: F)
