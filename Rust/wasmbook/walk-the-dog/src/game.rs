@@ -20,7 +20,7 @@ struct SheetRect {
     h: i16,
 }
 
-#[derive(Deserialize,Clone)]
+#[derive(Deserialize, Clone)]
 struct Cell {
     frame: SheetRect,
 }
@@ -45,11 +45,12 @@ impl RedHatBoy {
         }
     }
 
-    fn draw(&self,renderer: &Renderer) {
+    fn draw(&self, renderer: &Renderer) {
         let frame_name = format!(
-            "{} ({}).png", 
-            self.state_machine.frame_name(), 
-            (self.state_machine.context().frame / 3 ) + 1);
+            "{} ({}).png",
+            self.state_machine.frame_name(),
+            (self.state_machine.context().frame / 3) + 1
+        );
 
         let sprite = self
             .sprite_sheet
@@ -64,13 +65,14 @@ impl RedHatBoy {
                 y: sprite.frame.y.into(),
                 width: sprite.frame.w.into(),
                 height: sprite.frame.h.into(),
-            }, 
+            },
             &Rect {
                 x: self.state_machine.context().position.x.into(),
                 y: self.state_machine.context().position.y.into(),
                 width: sprite.frame.w.into(),
                 height: sprite.frame.h.into(),
-            })
+            },
+        )
     }
 
     fn update(&mut self) {
@@ -109,12 +111,12 @@ impl RedHatBoyStateMachine {
     fn transition(self, event: Event) -> Self {
         match (self, event) {
             (RedHatBoyStateMachine::Idle(state), Event::Run) => state.run().into(),
-            (RedHatBoyStateMachine::Running(state),Event::Jump) => state.jump().into(),
-            (RedHatBoyStateMachine::Running(state),Event::Slide) => state.slide().into(),
-            (RedHatBoyStateMachine::Idle(state),Event::Update) => state.update().into(),
-            (RedHatBoyStateMachine::Running(state),Event::Update) => state.update().into(),
-            (RedHatBoyStateMachine::Sliding(state),Event::Update) => state.update().into(),
-            (RedHatBoyStateMachine::Jumping(state),Event::Update) => state.update().into(),
+            (RedHatBoyStateMachine::Running(state), Event::Jump) => state.jump().into(),
+            (RedHatBoyStateMachine::Running(state), Event::Slide) => state.slide().into(),
+            (RedHatBoyStateMachine::Idle(state), Event::Update) => state.update().into(),
+            (RedHatBoyStateMachine::Running(state), Event::Update) => state.update().into(),
+            (RedHatBoyStateMachine::Sliding(state), Event::Update) => state.update().into(),
+            (RedHatBoyStateMachine::Jumping(state), Event::Update) => state.update().into(),
             _ => self,
         }
     }
@@ -208,7 +210,7 @@ impl Game for WalkTheDog {
                 );
 
                 Ok(Box::new(WalkTheDog::Loaded(rhb)))
-            },
+            }
             WalkTheDog::Loaded(_) => Err(anyhow!("Game already initialized")),
         }
     }
@@ -217,10 +219,10 @@ impl Game for WalkTheDog {
         if let WalkTheDog::Loaded(rhb) = self {
             if keystate.is_pressed("ArrowRight") {
                 rhb.run_right();
-            } 
+            }
             if keystate.is_pressed("ArrowDown") {
                 rhb.slide();
-            } 
+            }
             if keystate.is_pressed("Space") {
                 rhb.jump();
             }
@@ -248,13 +250,13 @@ mod red_hat_boy_states {
 
     const GRAVITY: i16 = 1;
     const FLOOR: i16 = 475;
-    const IDLE_FRAME_NAME:&str = "Idle";
-    const IDLE_FRAMES:u8 = 29;
-    const RUN_FRAME_NAME:&str = "Run";
-    const RUN_FRAMES:u8 = 23;
+    const IDLE_FRAME_NAME: &str = "Idle";
+    const IDLE_FRAMES: u8 = 29;
+    const RUN_FRAME_NAME: &str = "Run";
+    const RUN_FRAMES: u8 = 23;
     const RUNNING_SPEED: i16 = 3;
-    const SLIDE_FRAME_NAME:&str = "Slide";
-    const SLIDE_FRAMES:u8 = 14;
+    const SLIDE_FRAME_NAME: &str = "Slide";
+    const SLIDE_FRAMES: u8 = 14;
     const JUMPING_FRAME_NAME: &str = "Jump";
     const JUMPING_FRAMES: u8 = 35;
     const JUMP_SPEED: i16 = -25;
@@ -265,57 +267,14 @@ mod red_hat_boy_states {
         _state: S,
     }
 
-    #[derive(Copy, Clone)]
-    pub struct RedHatBoyContext {
-        pub frame: u8,
-        pub position: Point,
-        pub velocity: Point,
-    }
-
-    impl RedHatBoyContext {
-        pub fn update(mut self,frame_count:u8) -> Self {
-            self.velocity.y += GRAVITY;
-
-            if self.frame < frame_count {
-                self.frame += 1;
-            } else {
-                self.frame = 0;
-            }
-
-            self.position.x += self.velocity.x;
-            self.position.y += self.velocity.y;
-
-            if self.position.y > FLOOR {
-                self.position.y = FLOOR;
-            }
-
-            self
-        }
-
-        fn reset_frame(mut self) -> Self {
-            self.frame = 0;
-            self
-        }
-
-        fn run_right(mut self) -> Self {
-            self.velocity.x += RUNNING_SPEED;
-            self
-        } 
-
-        fn set_vertical_velocity(mut self, velocity: i16) -> Self {
-            self.velocity.y = velocity;
-            self
-        }
-    }
-
-    #[derive(Copy, Clone)]
-    pub struct Idle;
-
     impl<S> RedHatBoyState<S> {
         pub fn context(&self) -> &RedHatBoyContext {
             &self.context
         }
     }
+
+    #[derive(Copy, Clone)]
+    pub struct Idle;
 
     impl RedHatBoyState<Idle> {
         pub fn new() -> Self {
@@ -433,5 +392,48 @@ mod red_hat_boy_states {
     pub enum JumpingEndState {
         Jumping(RedHatBoyState<Jumping>),
         Complete(RedHatBoyState<Running>),
+    }
+
+    #[derive(Copy, Clone)]
+    pub struct RedHatBoyContext {
+        pub frame: u8,
+        pub position: Point,
+        pub velocity: Point,
+    }
+
+    impl RedHatBoyContext {
+        pub fn update(mut self, frame_count: u8) -> Self {
+            self.velocity.y += GRAVITY;
+
+            if self.frame < frame_count {
+                self.frame += 1;
+            } else {
+                self.frame = 0;
+            }
+
+            self.position.x += self.velocity.x;
+            self.position.y += self.velocity.y;
+
+            if self.position.y > FLOOR {
+                self.position.y = FLOOR;
+            }
+
+            self
+        }
+
+        fn reset_frame(mut self) -> Self {
+            self.frame = 0;
+            self
+        }
+
+        fn run_right(mut self) -> Self {
+            self.velocity.x += RUNNING_SPEED;
+            self
+        }
+
+        fn set_vertical_velocity(mut self, velocity: i16) -> Self {
+            self.velocity.y = velocity;
+            self
+        }
     }
 }

@@ -3,7 +3,9 @@ use wasm_bindgen::{
     closure::WasmClosure, closure::WasmClosureFnOnce, prelude::Closure, JsCast, JsValue,
 };
 use wasm_bindgen_futures::JsFuture;
-use web_sys::{CanvasRenderingContext2d, Document, HtmlCanvasElement, HtmlImageElement, Response, Window};
+use web_sys::{
+    CanvasRenderingContext2d, Document, HtmlCanvasElement, HtmlImageElement, Response, Window,
+};
 
 pub type LoopClosure = Closure<dyn FnMut(f64)>;
 
@@ -71,9 +73,10 @@ pub async fn fetch_json(json_path: &str) -> Result<JsValue> {
 
     JsFuture::from(
         resp.json()
-            .map_err(|err| anyhow!("err casting to JsFuture: {:?}", err))?,)
-            .await
-            .map_err(|err| anyhow!("err casting to JsFuture: {:?}", err))
+            .map_err(|err| anyhow!("err casting to JsFuture: {:?}", err))?,
+    )
+    .await
+    .map_err(|err| anyhow!("err casting to JsFuture: {:?}", err))
 }
 
 pub fn spawn_local<F>(future: F)
