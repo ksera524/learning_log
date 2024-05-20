@@ -21,8 +21,10 @@ struct SheetRect {
 }
 
 #[derive(Deserialize, Clone)]
+#[serde(rename_all = "camelCase")]
 struct Cell {
     frame: SheetRect,
+    sprite_source_size: SheetRect,
 }
 
 #[derive(Deserialize, Clone)]
@@ -67,8 +69,8 @@ impl RedHatBoy {
                 height: sprite.frame.h.into(),
             },
             &Rect {
-                x: self.state_machine.context().position.x.into(),
-                y: self.state_machine.context().position.y.into(),
+                x: (self.state_machine.context().position.x + sprite.sprite_source_size.x as i16).into(),
+                y: (self.state_machine.context().position.y + sprite.sprite_source_size.y as i16).into(),
                 width: sprite.frame.w.into(),
                 height: sprite.frame.h.into(),
             },
@@ -189,6 +191,7 @@ impl From<JumpingEndState> for RedHatBoyStateMachine {
 pub struct Walk {
     boy: RedHatBoy,
     background: Image,
+    stone:Image,
 }
 
 pub enum WalkTheDog {
@@ -209,6 +212,7 @@ impl Game for WalkTheDog {
             WalkTheDog::Loading => {
                 let json = browser::fetch_json("rhb.json").await?;
                 let background = load_image("BG.png").await?;
+                let stone = load_image("Stone.png").await?;
 
                 let rhb = RedHatBoy::new(
                     json.into_serde::<Sheet>()?,
@@ -218,6 +222,7 @@ impl Game for WalkTheDog {
                 Ok(Box::new(WalkTheDog::Loaded(Walk {
                     boy: rhb,
                     background: Image::new(background,Point { x: 0, y: 0 }),
+                    stone: Image::new(stone,Point { x: 150, y: 546}),
                 })))
             }
             WalkTheDog::Loaded(_) => Err(anyhow!("Game already initialized")),
@@ -251,6 +256,7 @@ impl Game for WalkTheDog {
         if let WalkTheDog::Loaded(walk) = self {
             walk.background.draw(renderer);
             walk.boy.draw(renderer);
+            walk.stone.draw(renderer);
         }
     }
 }
@@ -259,7 +265,8 @@ mod red_hat_boy_states {
     use crate::engine::Point;
 
     const GRAVITY: i16 = 1;
-    const FLOOR: i16 = 475;
+    const FLOOR: i16 = 479;
+    const STARTING_POINT:i16 = -20;
     const IDLE_FRAME_NAME: &str = "Idle";
     const IDLE_FRAMES: u8 = 29;
     const RUN_FRAME_NAME: &str = "Run";
@@ -291,7 +298,9 @@ mod red_hat_boy_states {
             RedHatBoyState {
                 context: RedHatBoyContext {
                     frame: 0,
-                    position: Point { x: 0, y: FLOOR },
+                    position: Point { 
+                        x: STARTING_POINT, 
+                        y: FLOOR },
                     velocity: Point { x: 0, y: 0 },
                 },
                 _state: Idle {},
