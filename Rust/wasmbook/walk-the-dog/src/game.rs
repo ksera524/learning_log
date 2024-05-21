@@ -12,6 +12,8 @@ use web_sys::HtmlImageElement;
 
 use self::red_hat_boy_states::*;
 
+const HEIGHT:i16 = 600;
+
 #[derive(Deserialize, Clone)]
 struct SheetRect {
     x: i16,
@@ -30,6 +32,55 @@ struct Cell {
 #[derive(Deserialize, Clone)]
 pub struct Sheet {
     frames: HashMap<String, Cell>,
+}
+
+struct Platform {
+    sheet: Sheet,
+    image: HtmlImageElement,
+    position: Point,
+}
+
+impl Platform {
+    fn new(sheet:Sheet,image:HtmlImageElement,position:Point) -> Self {
+        Platform {
+            sheet,
+            image,
+            position,
+        }
+    }
+
+    fn bounding_box(&self) -> Rect {
+        let platform = self
+            .sheet
+            .frames
+            .get("13.png")
+            .expect("13.png is not found");
+
+        Rect {
+            x: self.position.x.into(),
+            y: self.position.y.into(),
+            width: (platform.frame.w * 3).into(),
+            height: platform.frame.h.into(),
+        }
+    }
+
+    fn draw(&self,renderer:&Renderer) {
+        let platform = self.sheet
+            .frames
+            .get("13.png")
+            .expect("13.png is not found");
+
+        renderer.draw_image(
+            &self.image,
+            &Rect {
+                x: platform.frame.x.into(),
+                y: platform.frame.y.into(),
+                width: (platform.frame.w * 3).into(),
+                height: platform.frame.h.into(),
+            },
+            &self.bounding_box(),
+        )
+    }
 }
 
 struct RedHatBoy {
@@ -110,9 +161,14 @@ impl RedHatBoy {
         self.state_machine = self.state_machine.transition(Event::Jump);
     }
 
+    fn land_on(&mut self, position: f32) {
+        self.state_machine = self.state_machine.transition(Event::Land(position));
+    }
+
     fn knock_out(&mut self) {
         self.state_machine = self.state_machine.transition(Event::KnockOut);
     }
+
 }
 
 #[derive(Copy, Clone)]
@@ -130,7 +186,8 @@ pub enum Event {
     Slide,
     Update,
     Jump,
-    KnockOut
+    KnockOut,
+    Land(f32),
 }
 
 impl RedHatBoyStateMachine {
@@ -139,14 +196,17 @@ impl RedHatBoyStateMachine {
             (RedHatBoyStateMachine::Idle(state), Event::Run) => state.run().into(),
             (RedHatBoyStateMachine::Running(state), Event::Jump) => state.jump().into(),
             (RedHatBoyStateMachine::Running(state), Event::Slide) => state.slide().into(),
+            (RedHatBoyStateMachine::Running(state),Event::KnockOut) => state.knock_out().into(),
+            (RedHatBoyStateMachine::Sliding(state),Event::KnockOut) => state.knock_out().into(),
+            (RedHatBoyStateMachine::Jumping(state),Event::KnockOut) => state.knock_out().into(),
+            (RedHatBoyStateMachine::Running(state),Event::Land(position)) => state.land_on(position).into(),
+            (RedHatBoyStateMachine::Jumping(state), Event::Land(position)) => state.land_on(position).into(),
+            (RedHatBoyStateMachine::Sliding(state), Event::Land(position)) => state.land_on(position).into(),
             (RedHatBoyStateMachine::Idle(state), Event::Update) => state.update().into(),
             (RedHatBoyStateMachine::Running(state), Event::Update) => state.update().into(),
             (RedHatBoyStateMachine::Sliding(state), Event::Update) => state.update().into(),
             (RedHatBoyStateMachine::Jumping(state), Event::Update) => state.update().into(),
             (RedHatBoyStateMachine::Falling(state),Event::Update) => state.update().into(),
-            (RedHatBoyStateMachine::Running(state),Event::KnockOut) => state.knock_out().into(),
-            (RedHatBoyStateMachine::Sliding(state),Event::KnockOut) => state.knock_out().into(),
-            (RedHatBoyStateMachine::Jumping(state),Event::KnockOut) => state.knock_out().into(),
             _ => self,
         }
     }
@@ -227,7 +287,7 @@ impl From<JumpingEndState> for RedHatBoyStateMachine {
     fn from(end_state: JumpingEndState) -> Self {
         match end_state {
             JumpingEndState::Jumping(jumping_state) => jumping_state.into(),
-            JumpingEndState::Complete(standing_state) => standing_state.into(),
+            JumpingEndState::Landing(standing_state) => standing_state.into(),
         }
     }
 }
@@ -245,6 +305,7 @@ pub struct Walk {
     boy: RedHatBoy,
     background: Image,
     stone:Image,
+    platform:Platform,
 }
 
 pub enum WalkTheDog {
@@ -266,6 +327,12 @@ impl Game for WalkTheDog {
                 let json = browser::fetch_json("rhb.json").await?;
                 let background = load_image("BG.png").await?;
                 let stone = load_image("Stone.png").await?;
+                let platform_sheet = browser::fetch_json("tiles.json").await?;
+                let platform = Platform::new(
+                    platform_sheet.into_serde::<Sheet>()?,
+                    engine::load_image("tiles.png").await?,
+                    Point { x: 200, y: 400 },
+                );
 
                 let rhb = RedHatBoy::new(
                     json.into_serde::<Sheet>()?,
@@ -276,6 +343,7 @@ impl Game for WalkTheDog {
                     boy: rhb,
                     background: Image::new(background,Point { x: 0, y: 0 }),
                     stone: Image::new(stone,Point { x: 150, y: 546}),
+                    platform,
                 })))
             }
             WalkTheDog::Loaded(_) => Err(anyhow!("Game already initialized")),
@@ -299,6 +367,14 @@ impl Game for WalkTheDog {
             if walk
                 .boy
                 .bounding_box()
+                .intersects(&walk.platform.bounding_box())
+                {
+                    walk.boy.land_on(walk.platform.bounding_box().y);
+                }
+
+            if walk
+                .boy
+                .bounding_box()
                 .intersects(walk.stone.bounding_box())
                 {
                     walk.boy.knock_out();
@@ -318,6 +394,7 @@ impl Game for WalkTheDog {
             walk.background.draw(renderer);
             walk.boy.draw(renderer);
             walk.stone.draw(renderer);
+            walk.platform.draw(renderer);
         }
     }
 }
@@ -325,9 +402,13 @@ impl Game for WalkTheDog {
 mod red_hat_boy_states {
     use crate::engine::Point;
 
+    use super::HEIGHT;
+
     const GRAVITY: i16 = 1;
     const FLOOR: i16 = 479;
+    const PLAYER_HEGITH:i16 = HEIGHT - FLOOR;
     const STARTING_POINT:i16 = -20;
+    const TERMINAL_VELOCITY : i16 = 20;
     const IDLE_FRAME_NAME: &str = "Idle";
     const IDLE_FRAMES: u8 = 29;
     const RUN_FRAME_NAME: &str = "Run";
@@ -413,6 +494,13 @@ mod red_hat_boy_states {
             }
         }
 
+        pub fn land_on(self,position:f32) -> RedHatBoyState<Running> {
+            RedHatBoyState {
+                context: self.context.set_on(position as i16),
+                _state: Running {},
+            }
+        }
+
         pub fn knock_out(self) -> RedHatBoyState<Falling> {
             RedHatBoyState {
                 context: self.context.reset_frame().stop(),
@@ -446,6 +534,13 @@ mod red_hat_boy_states {
             }
         }
 
+        pub fn land_on(self, position: f32) -> RedHatBoyState<Sliding> {
+            RedHatBoyState {
+                context: self.context.set_on(position as i16),
+                _state: Sliding {},
+            }
+        }
+
         pub fn knock_out(self) -> RedHatBoyState<Falling> {
             RedHatBoyState {
                 context: self.context.reset_frame().stop(),
@@ -471,15 +566,15 @@ mod red_hat_boy_states {
             self.context = self.context.update(JUMPING_FRAMES);
 
             if self.context.position.y >= FLOOR {
-                JumpingEndState::Complete(self.land())
+                JumpingEndState::Landing(self.land_on(HEIGHT.into()))
             } else {
                 JumpingEndState::Jumping(self)
             }
         }
 
-        fn land(self) -> RedHatBoyState<Running> {
+        pub fn land_on(self, position: f32) -> RedHatBoyState<Running> {
             RedHatBoyState {
-                context: self.context.reset_frame(),
+                context: self.context.reset_frame().set_on(position as i16),
                 _state: Running {},
             }
         }
@@ -494,7 +589,7 @@ mod red_hat_boy_states {
 
     pub enum JumpingEndState {
         Jumping(RedHatBoyState<Jumping>),
-        Complete(RedHatBoyState<Running>),
+        Landing(RedHatBoyState<Running>),
     }
 
     #[derive(Copy, Clone)]
@@ -546,7 +641,9 @@ mod red_hat_boy_states {
 
     impl RedHatBoyContext {
         pub fn update(mut self, frame_count: u8) -> Self {
-            self.velocity.y += GRAVITY;
+            if self.velocity.y < TERMINAL_VELOCITY {
+                self.velocity.y += GRAVITY;
+            }
 
             if self.frame < frame_count {
                 self.frame += 1;
@@ -581,6 +678,12 @@ mod red_hat_boy_states {
 
         fn stop(mut self) -> Self {
             self.velocity.x = 0;
+            self
+        }
+
+        fn set_on(mut self, position: i16) -> Self{
+            let position = position - PLAYER_HEGITH;
+            self.position.y = position;
             self
         }
     }
