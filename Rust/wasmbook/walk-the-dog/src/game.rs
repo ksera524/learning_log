@@ -219,6 +219,9 @@ impl RedHatBoy {
         self.state_machine.context().velocity.y
     }
 
+    fn walking_speed(&self) -> i16 {
+        self.state_machine.context().velocity.x
+    }
 }
 
 #[derive(Copy, Clone)]
@@ -358,6 +361,12 @@ pub struct Walk {
     platform:Platform,
 }
 
+impl Walk {
+    fn velocity(&self) -> i16 {
+        -self.boy.walking_speed()
+    }
+}
+
 pub enum WalkTheDog {
     Loading,
     Loaded(Walk),
@@ -419,6 +428,10 @@ impl Game for WalkTheDog {
             }
 
             walk.boy.update();
+
+            walk.platform.position.x += walk.velocity();
+            walk.stone.move_horizontally(walk.velocity());
+            walk.background.move_horizontally(walk.velocity());
 
             for bounding_box in &walk.platform.bounding_boxes() {
                 if walk
@@ -714,7 +727,6 @@ mod red_hat_boy_states {
                 self.frame = 0;
             }
 
-            self.position.x += self.velocity.x;
             self.position.y += self.velocity.y;
 
             if self.position.y > FLOOR {

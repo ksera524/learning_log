@@ -254,4 +254,9 @@ impl Image {
     pub fn draw(&self,renderer:&Renderer) {
         renderer.draw_entire_image(&self.element, &self.position)
     }
+
+    pub fn move_horizontally(&mut self,distance:i16) {
+        self.bounding_box.x += distance as f32;
+        self.position.x += distance;
+    }
 }
