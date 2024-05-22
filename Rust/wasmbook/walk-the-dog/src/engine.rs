@@ -15,17 +15,52 @@ use crate::browser::{self, LoopClosure};
 const FRAME_SIZE: f32 = 1.0 / 60.0 * 1000.0; // 60 fps
 
 pub struct Rect {
-    pub x: f32,
-    pub y: f32,
-    pub width: f32,
-    pub height: f32,
+    position: Point,
+    pub width: i16,
+    pub height: i16,
 }
 
 impl Rect {
+    pub fn new(position: Point, width: i16, height: i16) -> Self {
+        Self {
+            position,
+            width,
+            height,
+        }
+    }
+
+    pub fn new_from_x_y(x:i16,y:i16,width:i16,height:i16) -> Self {
+        Self {
+            position: Point { x, y },
+            width,
+            height,
+        }
+    }
+
+    pub fn x(&self) -> i16 {
+        self.position.x
+    }
+
+    pub fn y(&self) -> i16 {
+        self.position.y
+    }
+
+    pub fn set_x(&mut self,x:i16) {
+        self.position.x = x
+    }
+
     pub fn intersects(&self,rect:&Rect) -> bool {
-        self.x < (rect.x + rect.width) && (self.x + self.width) > rect.x
+        self.x() < self.right() && self.right() > rect.x()
         &&
-        self.y < (rect.y + rect.height) && (self.y + self.height) > rect.y
+        self.y() < rect.bottom() && rect.bottom() > rect.y()
+    }
+
+    pub fn right(&self) -> i16 {
+        self.x() + self.width
+    }
+
+    pub fn bottom(&self) -> i16 {
+        self.y() + self.height
     }
 }
 
@@ -42,8 +77,8 @@ pub struct Renderer {
 impl Renderer {
     pub fn clear(&self, rect: &Rect) {
         self.context.clear_rect(
-            rect.x.into(),
-            rect.y.into(),
+            rect.x().into(),
+            rect.y().into(),
             rect.width.into(),
             rect.height.into(),
         );
@@ -53,12 +88,12 @@ impl Renderer {
         self.context
             .draw_image_with_html_image_element_and_sw_and_sh_and_dx_and_dy_and_dw_and_dh(
                 &image,
-                frame.x.into(),
-                frame.y.into(),
+                frame.x().into(),
+                frame.y().into(),
                 frame.width.into(),
                 frame.height.into(),
-                destination.x.into(),
-                destination.y.into(),
+                destination.x().into(),
+                destination.y().into(),
                 destination.width.into(),
                 destination.height.into(),
             )
@@ -228,22 +263,19 @@ fn prepare_input() -> Result<UnboundedReceiver<KeyPress>> {
 
 pub struct Image {
     element: HtmlImageElement,
-    position: Point,
     bounding_box: Rect,
 }
 
 impl Image {
     pub fn new(element: HtmlImageElement, position: Point) -> Self {
-        let bounding_box = Rect {
-            x:position.x.into(),
-            y:position.y.into(),
-            width: element.width() as f32,
-            height: element.height() as f32,
-        };
+        let bounding_box = Rect::new(
+                position,
+                element.width() as i16,
+                element.height() as i16,
+            );
 
         Self { 
             element, 
-            position,
             bounding_box,}
     }
 
@@ -252,20 +284,18 @@ impl Image {
     }
 
     pub fn draw(&self,renderer:&Renderer) {
-        renderer.draw_entire_image(&self.element, &self.position)
+        renderer.draw_entire_image(&self.element, &self.bounding_box().position)
     }
 
     pub fn move_horizontally(&mut self,distance:i16) {
-        self.bounding_box.x += distance as f32;
-        self.position.x += distance;
+        self.bounding_box.set_x(self.bounding_box.x() + distance);
     }
 
     pub fn set_x(&mut self,x:i16) {
-        self.bounding_box.x = x as f32;
-        self.position.x = x;
+        self.bounding_box.set_x(x);
     }
 
     pub fn right(&self) -> i16 {
-        (self.bounding_box.x + self.bounding_box.width) as i16
+        self.bounding_box.right()
     }
 }
