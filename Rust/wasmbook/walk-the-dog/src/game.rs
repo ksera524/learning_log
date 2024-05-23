@@ -7,7 +7,7 @@ use crate::{
 use anyhow::{anyhow, Result};
 use async_trait::async_trait;
 use gloo_utils::format::JsValueSerdeExt;
-use serde::{de, Deserialize};
+use serde::Deserialize;
 use web_sys::HtmlImageElement;
 
 use self::red_hat_boy_states::*;
@@ -38,6 +38,7 @@ pub trait Obstacle {
     fn check_intersection(&self,boy: &mut RedHatBoy);
     fn draw(&self,renderer:&Renderer);
     fn move_horizontally(&mut self,velocity:i16);
+    fn right(&self) -> i16;
 }
 
 struct Platform {
@@ -131,6 +132,14 @@ impl Obstacle for Platform {
                 }
             }
     }
+
+
+    fn right(&self) -> i16 {
+        self.bounding_boxes()
+            .last()
+            .unwrap_or(&Rect::default())
+            .right()
+    }
 }
 
 pub struct Barrier {
@@ -158,6 +167,10 @@ impl Obstacle for Barrier {
         if boy.bounding_box().intersects(&self.image.bounding_box()) {
             boy.knock_out();
     }}
+
+    fn right(&self) -> i16 {
+        self.image.right()
+    }
 }
 
 struct RedHatBoy {
@@ -492,6 +505,10 @@ impl Game for WalkTheDog {
             if second_background.right() < 0 {
                 second_background.set_x(first_background.right());
             }
+
+            walk.obstacles.retain(|obstacle| {
+                obstacle.right() > 0
+            });
 
             walk.obstacles.iter_mut().for_each(|obstacle| {
                 obstacle.move_horizontally(velocity);

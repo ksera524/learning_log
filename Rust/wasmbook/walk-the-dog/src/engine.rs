@@ -14,6 +14,7 @@ use crate::browser::{self, LoopClosure};
 
 const FRAME_SIZE: f32 = 1.0 / 60.0 * 1000.0; // 60 fps
 
+#[derive(Default)]
 pub struct Rect {
     position: Point,
     pub width: i16,
@@ -64,7 +65,7 @@ impl Rect {
     }
 }
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy,Default)]
 pub struct Point {
     pub x: i16,
     pub y: i16,
