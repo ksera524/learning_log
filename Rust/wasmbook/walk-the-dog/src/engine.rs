@@ -17,7 +17,7 @@ const FRAME_SIZE: f32 = 1.0 / 60.0 * 1000.0; // 60 fps
 
 #[derive(Default)]
 pub struct Rect {
-    position: Point,
+    pub position: Point,
     pub width: i16,
     pub height: i16,
 }
@@ -312,11 +312,7 @@ pub struct Image {
 
 impl Image {
     pub fn new(element: HtmlImageElement, position: Point) -> Self {
-        let bounding_box = Rect::new(
-                position,
-                element.width() as i16,
-                element.height() as i16,
-            );
+        let bounding_box = Rect::new(position, element.width() as i16, element.height() as i16);
 
         Self { 
             element, 

@@ -2,6 +2,7 @@
 mod browser;
 mod engine;
 mod game;
+mod segment;
 
 use engine::GameLoop;
 use game::WalkTheDog;
