@@ -13,7 +13,7 @@ use self::red_hat_boy_states::*;
 
 const HEIGHT:i16 = 600;
 pub trait Obstacle {
-    fn check_intersection(&self,boy: &mut RedHatBoy);
+    fn check_intersection(&self, boy: &mut RedHatBoy);
     fn draw(&self,renderer:&Renderer);
     fn move_horizontally(&mut self,velocity:i16);
     fn right(&self) -> i16;
@@ -22,13 +22,36 @@ pub trait Obstacle {
 struct Platform {
     sheet:Rc<SpriteSheet>,
     position: Point,
+    bounding_boxes: Vec<Rect>,
+    sprites: Vec<Cell>,
 }
 
 impl Platform {
-    fn new(sheet:Rc<SpriteSheet>,position:Point) -> Self {
+    fn new(
+        sheet:Rc<SpriteSheet>,
+        position:Point,
+        sprite_names:&[&str],
+        bounding_boxes:&[Rect]) -> Self {
+        let sprites = sprite_names
+            .iter()
+            .filter_map(|name| sheet.cell(name).cloned())
+            .collect();
+
+        let bounding_boxes = bounding_boxes
+            .iter()
+            .map(|bounding_box| Rect::new_from_x_y(
+                position.x + bounding_box.x(),
+                position.y + bounding_box.y(),
+                bounding_box.width,
+                bounding_box.height,
+            ))
+            .collect();
+
         Platform {
             sheet,
             position,
+            bounding_boxes,
+            sprites,
         }
     }
 
@@ -45,51 +68,35 @@ impl Platform {
             platform.frame.h)
     }
 
-    fn bounding_boxes(&self) -> Vec<Rect> {
-        const X_OFFSET:i16 = 60;
-        const END_HEIGHT:i16 = 54;
-        let destination = self.destination_box();
-        let bounding_box_one = Rect::new_from_x_y(
-            destination.x(),
-            destination.y(),
-            X_OFFSET,
-            END_HEIGHT
-        );
-
-
-        let bounding_box_two = Rect::new_from_x_y(
-            destination.x() + X_OFFSET, 
-            destination.y(), 
-            destination.width - (X_OFFSET * 2),
-            destination.height);
-
-        let bounding_box_three = Rect::new_from_x_y(
-            destination.x() + destination.width - X_OFFSET,
-            destination.y(), 
-            X_OFFSET,
-            END_HEIGHT);
-
-        vec![bounding_box_one,bounding_box_two,bounding_box_three]
+    fn bounding_boxes(&self) -> &Vec<Rect> {
+       &self.bounding_boxes
     }
 }
 
 impl Obstacle for Platform {
     fn draw(&self,renderer:&Renderer) {
-        let platform = self.sheet
-            .cell("13.png")
-            .expect("13.png is not found");
-
-            &self.sheet.draw(
+        let mut x = 0;
+        self.sprites.iter().for_each(|sprite|{
+            self.sheet.draw(
                 renderer, 
                 &Rect::new_from_x_y(
-                    platform.frame.x,
-                    platform.frame.y, 
-                    platform.frame.w * 3, 
-                    platform.frame.h),
-                &self.destination_box());
+                    sprite.frame.x,
+                    sprite.frame.y, 
+                    sprite.frame.w,
+                sprite.frame.h),
+                &Rect::new_from_x_y(
+                    self.position.x + x,
+                    self.position.y ,
+                    sprite.frame.w,
+                    sprite.frame.h,));
+            x += sprite.frame.w;
+        })
     }
     fn move_horizontally(&mut self,velocity:i16) {
         self.position.x += velocity;
+        self.bounding_boxes.iter_mut().for_each(|bounding_box| {
+            bounding_box.set_x(bounding_box.x() + velocity);
+        });
     }
 
     fn check_intersection(&self,boy: &mut RedHatBoy) {
@@ -431,8 +438,14 @@ impl Game for WalkTheDog {
                     sprite_sheet.clone(),
                     Point { 
                         x: FIRST_PLATFORM,
-                        y: HIGH_PLATFORM
+                        y: LOW_PLATFORM,
                     },
+                    &[ "13.png", "14.png", "15.png"],
+                    &[
+                        Rect::new_from_x_y(0, 0, 60, 54),
+                        Rect::new_from_x_y(60, 0, 384 - (60 * 2), 93),
+                        Rect::new_from_x_y(384 - 60, 0, 60, 54),
+                    ],
                 );
 
                 let rhb = RedHatBoy::new(
