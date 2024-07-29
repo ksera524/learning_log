@@ -20,6 +20,9 @@ mod tests {
 
         assert_eq!(calculator.calculate_tip(vec![]), 0);
         assert_eq!(calculator.calculate_tip(vec!["a", "b", "c", "d", "e"]), 10);
-        assert_eq!(calculator.calculate_tip(vec!["a", "b", "c", "d", "e", "f"]), 20);
+        assert_eq!(
+            calculator.calculate_tip(vec!["a", "b", "c", "d", "e", "f"]),
+            20
+        );
     }
 }

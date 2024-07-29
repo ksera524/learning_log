@@ -3,10 +3,10 @@ pub fn increment(x: i32) -> i32 {
 }
 
 pub fn get_first_char(s: &str) -> char {
-   s.chars().next().unwrap()
+    s.chars().next().unwrap()
 }
 
-pub fn word_score(word:&str) -> i32 {
+pub fn word_score(word: &str) -> i32 {
     word.replace('a', "").len() as i32
 }
 
@@ -26,6 +26,6 @@ mod tests {
 
     #[test]
     fn test_word_score() {
-        assert_eq!(word_score("hello"), 5);
+        assert_eq!(word_score("helloaa"), 5);
     }
 }
