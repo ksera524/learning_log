@@ -1,5 +1,5 @@
 mod exercise;
 
 fn main() {
-    println!("Hello, world!");
+    exercise::chap5::run();
 }
