@@ -45,10 +45,10 @@ where
 }
 
 pub fn high_scoreing_words<F>(
-    list: Vec<String>
-) -> Box<dyn Fn(F) -> Box<dyn Fn(i32) -> Vec<String>> >
+    list: Vec<String>,
+) -> Box<dyn Fn(F) -> Box<dyn Fn(i32) -> Vec<String>>>
 where
-    F: Fn(&str) -> i32  + 'static,
+    F: Fn(&str) -> i32 + 'static,
 {
     let list = Arc::new(list);
     Box::new(move |f: F| {
@@ -62,22 +62,12 @@ where
     })
 }
 
-pub fn larger_than(list:Vec<i32>) ->impl Fn(i32) -> Vec<i32> {
-    move |higehr_than | {
-        list.iter()
-            .filter(|s| **s > higehr_than)
-            .cloned()
-            .collect()
-    }
+pub fn larger_than(list: Vec<i32>) -> impl Fn(i32) -> Vec<i32> {
+    move |higehr_than| list.iter().filter(|s| **s > higehr_than).cloned().collect()
 }
 
-pub fn divisible_by(list:Vec<i32>) -> impl Fn(i32) -> Vec<i32> {
-    move |divide| {
-        list.iter()
-            .filter(|s| **s % divide == 0)
-            .cloned()
-            .collect()
-    }
+pub fn divisible_by(list: Vec<i32>) -> impl Fn(i32) -> Vec<i32> {
+    move |divide| list.iter().filter(|s| **s % divide == 0).cloned().collect()
 }
 
 pub fn shorter_than(list: Vec<String>) -> impl Fn(i32) -> Vec<String> {
@@ -89,7 +79,7 @@ pub fn shorter_than(list: Vec<String>) -> impl Fn(i32) -> Vec<String> {
     }
 }
 
-pub fn number_of_s(list:Vec<String>) -> impl Fn(i32) -> Vec<String> {
+pub fn number_of_s(list: Vec<String>) -> impl Fn(i32) -> Vec<String> {
     move |threshold| {
         list.iter()
             .filter(|word| (word.len() - word.replace("s", "").len()) as i32 >= threshold)
@@ -97,7 +87,6 @@ pub fn number_of_s(list:Vec<String>) -> impl Fn(i32) -> Vec<String> {
             .collect()
     }
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -186,50 +175,57 @@ mod tests {
 
     #[test]
     fn larger_than_test() {
-        let list = vec![5,1,2,4,0];
+        let list = vec![5, 1, 2, 4, 0];
         let func = larger_than(list);
 
-        assert_eq!(vec![5],func(4));
-        assert_eq!(vec![5,2,4],func(1));
+        assert_eq!(vec![5], func(4));
+        assert_eq!(vec![5, 2, 4], func(1));
     }
 
     #[test]
     fn divisible_by_test() {
-        let list = vec!(5,1,2,4,15);
+        let list = vec![5, 1, 2, 4, 15];
 
-        assert_eq!(vec![5,15],divisible_by(list.clone())(5));
-        assert_eq!(vec![2,4],divisible_by(list)(2));
+        assert_eq!(vec![5, 15], divisible_by(list.clone())(5));
+        assert_eq!(vec![2, 4], divisible_by(list)(2));
     }
 
     #[test]
     fn shorter_than_test() {
-        let list = vec!["scala".to_string(),"ada".to_string()];
+        let list = vec!["scala".to_string(), "ada".to_string()];
 
-        assert_eq!(vec!["scala".to_string(),"ada".to_string()],shorter_than(list.clone())(7));
-        assert_eq!(vec!["ada".to_string()],shorter_than(list)(4));
+        assert_eq!(
+            vec!["scala".to_string(), "ada".to_string()],
+            shorter_than(list.clone())(7)
+        );
+        assert_eq!(vec!["ada".to_string()], shorter_than(list)(4));
     }
 
     #[test]
     fn number_of_s_test() {
-        let list = vec!["rust".to_string(),"ada".to_string()];
+        let list = vec!["rust".to_string(), "ada".to_string()];
 
         let expected: Vec<String> = vec![];
-        assert_eq!(expected,number_of_s(list.clone())(3));
-        assert_eq!(vec!["rust".to_string()],number_of_s(list)(1));
+        assert_eq!(expected, number_of_s(list.clone())(3));
+        assert_eq!(vec!["rust".to_string()], number_of_s(list)(1));
     }
 
     #[test]
-    fn fold_test(){
-        let list = vec![5,1,2,4,100];
-        assert_eq!(112,list.iter().fold(0,|acc,&num| acc + num));
+    fn fold_test() {
+        let list = vec![5, 1, 2, 4, 100];
+        assert_eq!(112, list.iter().fold(0, |acc, &num| acc + num));
 
-        let list = vec!["scala","rust","ada"];
-        assert_eq!(12,list.iter().fold(0, |acc,word|acc + word.len()));
+        let list = vec!["scala", "rust", "ada"];
+        assert_eq!(12, list.iter().fold(0, |acc, word| acc + word.len()));
 
-        let list = vec!["scala","rust","ada","haskell"];
-        assert_eq!(3,list.iter().fold(0, |acc,word| acc + (word.len() - word.replace('s', "").len())));
+        let list = vec!["scala", "rust", "ada", "haskell"];
+        assert_eq!(
+            3,
+            list.iter().fold(0, |acc, word| acc
+                + (word.len() - word.replace('s', "").len()))
+        );
 
-        let list = vec![5,1,2,4,15];
-        assert_eq!(15,list.iter().fold(0,|acc,&num| acc.max(num)));
+        let list = vec![5, 1, 2, 4, 15];
+        assert_eq!(15, list.iter().fold(0, |acc, &num| acc.max(num)));
     }
 }
