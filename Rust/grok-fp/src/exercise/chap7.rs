@@ -115,7 +115,7 @@ fn search_artists(
             (genres.is_empty() || genres.contains(&artist.genre))
                 && (locations.is_empty() || locations.contains(&artist.origin))
                 && (!search_by_active_years
-                    || was_artist_active(&artist, &active_after, &active_before))
+                    || was_artist_active(artist, &active_after, &active_before))
         })
         .collect()
 }
@@ -123,7 +123,7 @@ fn search_artists(
 fn active_length(artist:&Aritist,current_year:i32) -> i32 {
     match &artist.years_active {
         YearsActive::StillActive { since } => current_year - since.0,
-        YearsActive::AcitiveBetween { start, end } => {end.0 ^ start.0}
+        YearsActive::AcitiveBetween { start, end } => {end.0 - start.0}
     }
 }
 
