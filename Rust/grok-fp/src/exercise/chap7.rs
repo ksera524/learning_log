@@ -94,10 +94,16 @@ enum MusicGunre {
     HardRock,
 }
 
-fn was_artist_active(artist:&Aritist,year_start:&YearsActiveStart,year_end:&YearsActiveEnd) -> bool {
+fn was_artist_active(
+    artist: &Aritist,
+    year_start: &YearsActiveStart,
+    year_end: &YearsActiveEnd,
+) -> bool {
     match &artist.years_active {
-        YearsActive::StillActive{since} =>  since.0 <= year_end.0,
-        YearsActive::AcitiveBetween { start, end } => start.0 <= year_end.0 && end.0 >= year_start.0
+        YearsActive::StillActive { since } => since.0 <= year_end.0,
+        YearsActive::AcitiveBetween { start, end } => {
+            start.0 <= year_end.0 && end.0 >= year_start.0
+        }
     }
 }
 
@@ -120,10 +126,10 @@ fn search_artists(
         .collect()
 }
 
-fn active_length(artist:&Aritist,current_year:i32) -> i32 {
+fn active_length(artist: &Aritist, current_year: i32) -> i32 {
     match &artist.years_active {
         YearsActive::StillActive { since } => current_year - since.0,
-        YearsActive::AcitiveBetween { start, end } => {end.0 - start.0}
+        YearsActive::AcitiveBetween { start, end } => end.0 - start.0,
     }
 }
 
