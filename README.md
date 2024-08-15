@@ -5,7 +5,7 @@
 - [MDN](https://developer.mozilla.org/ja/docs/Web)
 - [w3Schools](https://www.w3schools.com/)
 - [web.dev](https://web.dev/learn/)
-- [ ] [The Missing Semester of Your CS Education](https://missing-semester-jp.github.io/)
+- [The Missing Semester of Your CS Education](https://missing-semester-jp.github.io/)
 - [Linux Foundation](https://training.linuxfoundation.org/ja/resources/?trp-form-language=ja)
 
 ## 設計
@@ -42,6 +42,8 @@
   - [ ] [Kubernetes がいかに自動化の考え方を変えたか?](https://deeeet.com/writing/2018/12/13/how-kubernetes-change-our-way-of-automation/)
   - [ ] [Kubernetes に腰を据えて入門する方向けのロードマップ](https://qiita.com/riita10069/items/292c90b008e3714ee88b?utm_campaign=post_article&utm_medium=twitter&utm_source=twitter_share)
   - [ ] [自作して学ぶKubernetes Scheduler](https://engineering.mercari.com/blog/entry/20211220-create-your-kube-scheduler/)
+  - [ ] [クラウドネイティブなシステムを保護するための実践的 Kubernetes セキュリティ](https://github.com/kyohmizu/seccamp2024-B6)
+  - [ ] [Grafana ダッシュボードハンズオン](https://github.com/classmethod/grafana_dashboard_handson)
 
 ## データベース
 
@@ -121,6 +123,7 @@
 - [ ] [OAuth / OIDCを学ぶための最短経路](https://blog.70-10.net/posts/oauth-oidc-studying/)
 - [ ] [『プロフェッショナルSSL/TLS』の読み方（私論）](https://golden-lucky.hatenablog.com/entry/2022/12/20/100320)
 - [ ] [基本から理解するJWTとJWT認証の仕組み](https://developer.mamezou-tech.com/blogs/2022/12/08/jwt-auth/)
+- [ ] [セキュリティ監視入門](https://mztn.notion.site/4a1b43b9101c4f669f32f805b2393206)
 
 ## Testing
 
@@ -154,9 +157,6 @@
 
 - [ ] [gRPC がフロントエンド通信の第一の選択肢になる時代がやってきたかも？](https://future-architect.github.io/articles/20220819a/)
 
-## GPT
-
-- [ ] [Prompt-Engineering-Guide](https://maximum80.github.io/Prompt-Engineering-Guide/)
 
 ## CDN
 - [ ] [CDN 入門とエッジでのアプリケーション実行](https://future-architect.github.io/articles/20230427a/)
@@ -224,7 +224,7 @@
   - [ ] [Build a Lua Interpreter in Rust](https://wubingzheng.github.io/build-lua-in-rust/en/)
   - [ ] [作って学ぶルーティングプロトコル　RustでBGPを実装](https://www.amazon.co.jp/%E4%B8%89%E5%A5%BD-%E9%99%B5%E5%A4%AA/dp/4295600989?&linkCode=shr&tag=cq3j-22&language=en_US&ref_=as_li_ss_shr&creativeASIN=4295600989&camp=1207&creative=undefined&linkId=370176718b2cc5b212b432a855e67cb6)
   - [ ] [Rustで数値計算](https://zenn.dev/termoshtt/books/b4bce1b9ea5e6853cb07)
-  - [ ] []()
+  - [ ] [Rustのライフタイムについてのよくある誤解](https://github.com/pretzelhammer/rust-blog/blob/master/posts/translations/jp/common-rust-lifetime-misconceptions.md)
   - [ ] []()
 
 - Go
