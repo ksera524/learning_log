@@ -51,7 +51,7 @@
   - [ ] [データベースシステム自作入門](https://github.com/starpos/develop-transaction-system/releases/tag/1.0)
   - [ ] [図解 DB インデックス](https://zenn.dev/suzuki_hoge/books/2022-12-database-index-9520da88d02c4f)
   - PostgreSQL
-    - [ ] [１日５分で PostgreSQL に詳しくなるアプリの開発](https://www.slideshare.net/nttdata-tech/postgrest-pgunconf38-nttdata)
+    - [x] [１日５分で PostgreSQL に詳しくなるアプリの開発](https://www.slideshare.net/nttdata-tech/postgrest-pgunconf38-nttdata)
   - Redis
     - [ ] [https://speakerdeck.com/mpyw/pai-ta-zhi-yu-notamedakenishibui-redis-shi-tutemasenka](https://speakerdeck.com/mpyw/pai-ta-zhi-yu-notamedakenishibui-redis-shi-tutemasenka)
 - SQL
