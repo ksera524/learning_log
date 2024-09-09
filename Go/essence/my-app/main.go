@@ -2,23 +2,31 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"sync"
 )
 
 func main() {
-	message := "hi"
+	n := 0;
+
+	var wg sync.WaitGroup
+	wg.Add(2)
+
 	go func() {
-		sendMessage(message)
+		defer wg.Done()
+		for i := 0; i < 1000; i++ {
+			n++
+		}
 	}()
 
-	message = "ho"
+	go func() {
+		defer wg.Done()
+		for i := 0; i < 1000; i++ {
+			n++
+		}
+	}()
 
-	time.Sleep(time.Second)
-	fmt.Println(message)
-	time.Sleep(time.Second)
-}
+	wg.Wait()
 
+	fmt.Println(n)
 
-func sendMessage(msg string) {
-	fmt.Println(msg)
 }
