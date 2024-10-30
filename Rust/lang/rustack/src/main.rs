@@ -1,4 +1,4 @@
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 enum Value<'src> {
     Num(i32),
     Op(&'src str),
@@ -10,6 +10,12 @@ impl<'src> Value<'src> {
         match self {
             Self::Num(val) => *val,
             _ => panic!("Value is not a number."),
+        }
+    }
+    fn to_block(self) -> Vec<Value<'src>> {
+        match self {
+            Value::Block(val) => val,
+            _ => panic!("Value is not a block"),
         }
     }
 }
@@ -33,18 +39,17 @@ fn parse<'a>(line: &'a str) -> Vec<Value> {
             let value;
             (value, rest) = parse_block(rest);
             stack.push(value);
-        } else if let Ok(parsed) = word.parse::<i32>() {
-            stack.push(Value::Num(parsed));
         } else {
-            match word {
-                "+" => add(&mut stack),
-                "-" => sub(&mut stack),
-                "*" => mol(&mut stack),
-                "/" => div(&mut stack),
-                _ => panic!("{word:?} could not be parsed"),
-            }
+            let code = if let Ok(parsed) = word.parse::<i32>() {
+                Value::Num(parsed)
+            } else {
+                Value::Op(word)
+            };
+            eval(code, &mut stack);
         }
         words = rest;
+
+        println!("stack: {stack:?}");
     }
 
     println!("stack: {stack:?}");
@@ -76,6 +81,20 @@ fn parse_block<'src, 'a>(input: &'a [&'src str]) -> (Value<'src>, &'a [&'src str
     (Value::Block(tokens), words)
 }
 
+fn eval<'src>(code: Value<'src>, stack: &mut Vec<Value<'src>>) {
+    match code {
+        Value::Op(op) => match op {
+            "+" => add(stack),
+            "-" => sub(stack),
+            "*" => mol(stack),
+            "/" => div(stack),
+            "if" => op_if(stack),
+            _ => panic!("{op:?} could not be parsed"),
+        },
+        _ => stack.push(code.clone()),
+    }
+}
+
 fn add(stack: &mut Vec<Value>) {
     let lhs = stack.pop().unwrap().as_num();
     let rhs = stack.pop().unwrap().as_num();
@@ -104,6 +123,28 @@ fn div(stack: &mut Vec<Value>) {
     stack.push(Value::Num(lhs / rhs));
 }
 
+fn op_if(stack: &mut Vec<Value>) {
+    let false_branch = stack.pop().unwrap().to_block();
+    let true_branch = stack.pop().unwrap().to_block();
+    let cond = stack.pop().unwrap().to_block();
+
+    for code in cond {
+        eval(code, stack);
+    }
+
+    let cond_reuslt = stack.pop().unwrap().as_num();
+
+    if cond_reuslt != 0 {
+        for code in true_branch {
+            eval(code, stack);
+        }
+    } else {
+        for code in false_branch {
+            eval(code, stack);
+        }
+    }
+}
+
 #[cfg(test)]
 mod test {
     use super::{parse, Value::*};
@@ -113,5 +154,21 @@ mod test {
             parse("1 2 + { 3 4 }"),
             vec![Num(3), Block(vec![Num(3), Num(4)])]
         );
+    }
+
+    #[test]
+    fn test_if_false() {
+        assert_eq!(
+            parse("{ 1 -1 + } { 100 } { -100 } if"),
+            vec![Num(-100)]
+        )
+    }
+
+    #[test]
+    fn test_if_true() {
+        assert_eq!(
+            parse("{ 1 1 + } { 100 } { -100 } if"),
+            vec![Num(100)]
+        )
     }
 }
