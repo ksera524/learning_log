@@ -1,16 +1,16 @@
 #[derive(Debug, PartialEq, Eq)]
 enum Token {
     Number,
-    Ident,
+    Ident
 }
 
 fn main() {
     let input = "123 world";
     println!("source: {:?}, parsed: {:?}", input, source(input));
-  
+
     let input = "Hello world";
     println!("source: {:?}, parsed: {:?}", input, source(input));
-  
+
     let input = "      world";
     println!("source: {:?}, parsed: {:?}", input, source(input));
 }
@@ -21,22 +21,16 @@ fn recognizer(input: &str) -> &str {
 
 fn whitespace(mut input: &str) -> &str {
     while matches!(input.chars().next(), Some(' ')) {
-        let mut chars = input.chars();
-        chars.next();
-        input = chars.as_str();
+        input = advance_char(input);
     }
     input
 }
 
 fn number(mut input: &str) -> (&str, Option<Token>) {
-    if matches!(
-        input.chars().next(),
-        Some(_x @ ('-' | '+' | '.' | '0'..='9'))
-    ) {
-        while matches!(input.chars().next(), Some(_x @ ('.' | '0'..='9'))) {
-            let mut chars = input.chars();
-            chars.next();
-            input = chars.as_str();
+    if matches!(peek_char(input), Some(_x @ ('-' | '+' | '.' | '0'..='9'))) {
+        
+        while matches!(peek_char(input), Some(_x @ ('.' | '0'..='9'))) {
+            input = advance_char(input);
         }
         (input, Some(Token::Number))
     } else {
@@ -45,17 +39,12 @@ fn number(mut input: &str) -> (&str, Option<Token>) {
 }
 
 fn ident(mut input: &str) -> (&str, Option<Token>) {
-    if matches!(
-        input.chars().next(),
-        Some(_x @ ('_' | 'a'..='z' | 'A'..='Z'))
-    ) {
+    if matches!(peek_char(input), Some(_x @ ('_' | 'a'..='z' | 'A'..='Z'))) {
         while matches!(
-            input.chars().next(),
+            peek_char(input),
             Some(_x @ ('a'..='z' | 'A'..='Z' | '0'..='9'))
         ) {
-            let mut chars = input.chars();
-            chars.next();
-            input = chars.as_str();
+            input = advance_char(input);
         }
         (input, Some(Token::Ident))
     } else {
@@ -84,6 +73,16 @@ fn source(mut input: &str) -> Vec<Token> {
         };
     }
     tokens
+}
+
+fn advance_char(input: &str) -> &str {
+    let mut chars = input.chars();
+    chars.next();
+    chars.as_str()
+}
+
+fn peek_char(input: &str) -> Option<char> {
+    input.chars().next()
 }
 
 #[cfg(test)]
